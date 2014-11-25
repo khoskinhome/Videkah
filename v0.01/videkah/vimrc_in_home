@@ -4,6 +4,9 @@
 " ln -s ~/.vim/videkah/vimrc_in_home ~/.vimrc
 " ( when ~/.vim/videkah is symlink to the git-checkout )
 
+" or the ~/.vimrc could just :-
+" source $HOME/.vim/videkah/vimrc_in_home
+
 source $HOME/.vim/videkah/bin/vimrc_videkah_source_this
 source $HOME/.vim/videkah/bin/vimrc_extras
 source $HOME/.vim/videkah/bin/vimrc_khoskin

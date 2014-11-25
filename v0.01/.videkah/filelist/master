@@ -1,0 +1,38 @@
+
+################################
+## Tue Nov 25 23:32:39 GMT 2014
+# general files , docs, install :-
+./README.INSTALL.TXT
+./videkah/README
+./videkah/bin/README.txt
+./find-all-files.pl
+./install.me.pl
+#######################
+
+#vimrc files :-
+./videkah/vimrc_in_home:1:  # the one that is either symlinked to from ~/.vimrc or sourced in there.
+
+./videkah/bin/vimrc_extras
+
+./videkah/bin/vimrc_videkah_source_this
+# the vimrc_videkah_source_this conditionally sources vimrc_videkah
+./videkah/bin/vimrc_videkah
+
+
+./videkah/bin/vimrc_khoskin
+
+######################################
+# Bash shell script to start videkah :-
+./videkah/bin/videkah_khaos
+./videkah/bin/videkah
+
+# perl scripts used by videkah :-
+./videkah/bin/videkah_perl_ackgrep.pl
+./videkah/bin/videkah_perlfindsubinclasses.pl
+./videkah/bin/videkah_perlstacktrace.pl
+./videkah/bin/videkah_generate_config
+
+
+
+################################
+

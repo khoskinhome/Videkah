@@ -1,7 +1,7 @@
 #######
 videkah
 #######
-By Karl 'khaos' Hoskin. Jan -> March 2014.
+By Karl 'khaos' Hoskin. Jan -> November 2014.
 #########################################
 An IDE for Vim , for perl users.
 #########################################
@@ -21,6 +21,9 @@ filelist
 
 runlist
     where single line commands can be invoked on the shell
+
+Git-Diff
+    where a git diff can be created, and you can navigate from the lines in the diff directly to the file.
 
 perl_stacktrace
     where a perl stack trace can be pasted , and navigated around

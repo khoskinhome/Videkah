@@ -1,0 +1,4 @@
+
+
+clear; ./find-all-files.pl >> ./.videkah/filelist/master;
+

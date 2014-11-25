@@ -1,19 +1,20 @@
+INSTALL
+#######
 
+so you've got this checked out somewhere. 
 
-check this code out to somewhere say $VIDEKAH_CHECKOUT
+the ./install.me.pl script will *safely* install videkah , if it can.
 
-We'll assume that the Videkah git-repo is in :-
- 
-$VIDEKAH_CHECKOUT=$HOME/github.com/Videkah
+This script first see if it needs to "mkdir ~/.vim"
 
+Once there is a ~/.vim dir in there it creates a symlink
+called "videkah" to the "videkah" dir here.
+It will update it if ~/.vim/videkah already exists as a symlink/
+If ~/.vim/videkah already exists and its not a symlink, it will not do anything.
 
-# if ~/.vim doesn't exist , then mkdir ~/.vim
+the install will then attempt to point the ~/.vimrc to the ~/.vim/videkah/vimrc_in_home.
+Again it will only do this if ~/.vimrc didn't exist or was a symlink already. If it is a real
+file, the install will not do anything.
 
-cd ~/.vim
-
-
-videkah -> /home/khoskin/github.com/Videkah/v0/videkah
-
-ln -s $VIDEKAH_CHECKOUT/v0/videkah videkah
-
-ln -s ~/.vim/videkah/vimrc_in_home ~/.vimrc
+So with the above 2 symlinks the install can quickly switch to any version of videkah in
+the github.com repo.
