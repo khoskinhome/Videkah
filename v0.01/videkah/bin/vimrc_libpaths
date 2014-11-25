@@ -1,0 +1,156 @@
+
+" a now redundant file . get rid of IT .TODO
+
+" a dumping ground for redundant code
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"function! Videkah_git_diff_findblanklines( lineno , filename )
+"
+"    " this should only be called by  Videkah_create_git_diff_removelines_buffer()
+"    " finds the blank lines before and after a line that matches the  g:Videkah_todo_rm_this_line_regex  suffix
+"    let TODOrmRegex = g:Videkah_todo_rm_this_line_regex
+"
+"    " higher line is closer to line 1
+"    let higherline = a:lineno
+"    " lower line is closer to the end of the file.
+"    let lowerline = a:lineno
+"
+"    if ( ! TryAndOpenFileName( a:filename ) )
+"        echo "(trying to find blank lines around rm line) Can't open ".a:filename
+"        call TryAndOpenFileName(g:videkah_git_diff_TODO)
+"        return ''
+"    else
+"        exec a:lineno
+"        " check that it is an # TODO rm this line
+"        " karl here
+"        " let g:Videkah_todo_rm_this_line_regex = g:Videkah_todo_rm_this_line_suffix.'$'
+"        if ( empty ( matchstr( g:Videkah_todo_rm_this_line_regex , getline('.'))))
+"            echo "(trying to find blank lines around rm line) In ".a:filename." line-num ".lineno." isn't a valid RM this line"
+"            call TryAndOpenFileName(g:videkah_git_diff_TODO)
+"            return ''
+"        else
+"            while ( empty (matchstr( '\S' , getline( higherline - 1) )))
+"                higherline -= 1
+"            endwhile
+"            while ( empty (matchstr( '\S' , getline( lowerline + 1) )))
+"                higherline += 1
+"            endwhile
+"        endif
+"    endif
+"
+"    " higher is the line closer to line 1
+"    " lower is the line closer to the last line in the file
+"    let higherNlower = []
+"    let higherNlower[0] = higherline
+"    let higherNlower[1] = lowerline
+"
+"    call TryAndOpenFileName(g:videkah_git_diff_TODO)
+"    return higherNlower
+"endfunction
+"
+"function! Videkah_git_diff_findblanklines(lineno, filename )
+"    " this should only be called by  Videkah_create_git_diff_removelines_buffer()
+"    " finds the blank lines before and after a line that matches the  g:Videkah_todo_rm_this_line_regex  suffix
+"    let TODOrmRegex = g:Videkah_todo_rm_this_line_regex
+"
+"    " returning until this is fixed. See below .
+"    return [a:lineno, a:lineno ]
+"
+"
+"
+"    let lineno = a:lineno
+"    let filename = a:filename
+"
+"    " Needs fixing.
+"    " we actaully need to open the diff-buffer and see if the line above is a '^\s+' line , if it is resolve its position in the fileproper.
+"    " this whole method needs a good rewrite and fix.
+"
+"    if ( ! TryAndOpenFileName( a:filename ) )
+"        echo "(trying to find blank lines around rm line) Can't open ".a:filename
+"        call TryAndOpenFileName(g:videkah_git_diff_TODO)
+"        return [a:lineno, a:lineno ]
+"    else
+"
+"
+"        " check that it is an # TODO rm this line
+"        " karl here
+"        " let g:Videkah_todo_rm_this_line_regex = g:Videkah_todo_rm_this_line_suffix.'$'
+"        if ( empty ( matchstr( getline(a:lineno), TODOrmRegex ) ))
+"            echo "(trying to find blank lines around rm line) In ".a:filename." line-num ".a:lineno." isn't a valid RM this line"
+"            call TryAndOpenFileName(g:videkah_git_diff_TODO)
+"            return [a:lineno, a:lineno ]
+"        else
+"
+"
+"            echo " We actually got into ".filename." and it was a TODO rm line at ".lineno
+"
+"            exec a:lineno
+"
+"            " higher line is closer to line 1
+"            let higherline = a:lineno
+"            while ( empty (matchstr( getline( higherline - 1) , '\S' )))
+"                let higherline = higherline - 1
+"            endwhile
+"
+"            call TryAndOpenFileName(g:videkah_git_diff_TODO)
+"            return [higherline, a:lineno ]
+"
+"            " lower line is closer to the end of the file.
+"            let lowerline = a:lineno
+"            while ( empty (matchstr( getline( lowerline + 1) , '\S' )))
+"                let lowerline = lowerline + 1
+"            endwhile
+"
+"            let higherNlower = []
+"            let higherNlower[0] = higherline
+"            let higherNlower[1] = lowerline
+"            echo "Found higher n lower ".higherline." : ".lowerline
+"
+"            call TryAndOpenFileName(g:videkah_git_diff_TODO)
+"            return higherNlower
+"        endif
+"    endif
+"
+"    echo "shouldn't have got here ....."
+"    call TryAndOpenFileName(g:videkah_git_diff_TODO)
+"    return [a:lineno, a:lineno ]
+"endfunction
+"
+"function! s:get_visual_selection()
+"  " Why is this not a built-in Vim script function?!
+"  let [lnum1, col1] = getpos("'<")[1:2]
+"  let [lnum2, col2] = getpos("'>")[1:2]
+"  let lines = getline(lnum1, lnum2)
+"  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+"  let lines[0] = lines[0][col1 - 1:]
+"  return join(lines, "\n")
+"endfunction
+
+
+"function! GetVidekahConfigParameter(param)
+"    " gets a config value from the .videkah/config
+"    " also swaps buffers so that you're back in the same place
+"    "
+"    " TODO . someway of caching .videkah/config parameters,
+"    "   and making sure they get updated when the .videkah/config buffer is editted and saved.
+"    "   in fact it should be the save event that updates the cache for .videkah/config variables
+"
+"    let currbuffer = @%
+"    if ! TryAndOpenFileName (g:videkah_config_buffer_name)
+"        echo "can't open the videkah config ".g:videkah_config_buffer_name
+"        exit
+"        return ''
+"    endif
+"
+"    let param_value = GetParameterFromCurrentBuffer(a:param)
+"    if ( ! empty ( param_value ) )
+"        let param_value[0] = Trim( param_value[0] )
+"    endif
+"
+"    " revert to original buffer. VERY IMPORTANT.
+"    call TryAndOpenFileName (currbuffer)
+"
+"    " param_value will either be an empty array, or an array with 1 element in it :-
+"    return param_value
+"endfunction
+

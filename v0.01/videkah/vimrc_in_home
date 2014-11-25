@@ -1,0 +1,14 @@
+" this is the vimrc that is symlinked from the $HOME
+" with something like :-
+
+" ln -s ~/.vim/videkah/vimrc_in_home ~/.vimrc
+" ( when ~/.vim/videkah is symlink to the git-checkout )
+
+source $HOME/.vim/videkah/bin/vimrc_videkah_source_this
+source $HOME/.vim/videkah/bin/vimrc_extras
+source $HOME/.vim/videkah/bin/vimrc_khoskin
+
+"source $HOME/.vim/vimrc_git_diff_only
+
+"source $HOME/.vim/plugin/grammarian.vim
+
