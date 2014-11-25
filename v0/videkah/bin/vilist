@@ -1,0 +1,65 @@
+#!/bin/bash
+
+
+LISTOFFILES=''
+
+. /etc/bash_completion.d/git
+
+GITPS1=`__git_ps1`
+
+git_prefix=`regex_git_ps1_prefix.pl "$GITPS1"`
+
+
+vilistrun=$HOME'/.vilistrun'
+
+touch $vilistrun
+
+while [ -f $vilistrun ] 
+do
+    # if something in vim recreates the vilistrun file , we'll run all this again.
+    rm $vilistrun
+
+    if [[ $1 == gitdifffilesextract ]]; then
+
+        LISTOFFILES=`gitdifffilesextract $@`
+
+        . $HOME/bin/set_title.bash "vilist $git_prefix gitdiff"
+    else
+
+        shortname=$1
+
+
+        if [ ! $shortname ]; then
+
+            shortname=`regex_git_ps1.pl "$GITPS1"`
+        fi
+
+        filename=$HOME"/filelists/$shortname"
+        runfilename=$HOME"/runlists/$shortname"
+
+        echo "using filename $filename"
+
+#        if [ ! -f $filename ]; then
+#            echo "can't file filelist $filename";
+#            exit 1;
+#        else
+             ##### LISTOFFILES=`unhashedlines.pl $HOME/filelists/$1`
+            LISTOFFILES=`unhashed_n_c2s.pl $filename `
+#        fi
+        . $HOME/bin/set_title.bash "vilist $git_prefix $shortname"
+    fi
+
+    ## c2s_LISTOFFILES=`c2s_files.pl
+
+    #echo "vim $filename $runfilename $LISTOFFILES"
+    echo "vim $filename $LISTOFFILES"
+
+    # if something in vim recreates the vilistrun file , we'll run all this again.
+    vim $filename $LISTOFFILES
+
+done
+
+. $HOME/bin/TITLEdefault.bash
+
+
+

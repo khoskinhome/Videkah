@@ -1,0 +1,11 @@
+
+source $HOME/.vim/videkah/bin/vimrc_videkah_source_this
+source $HOME/.vim/videkah/bin/vimrc_extras
+source $HOME/.vim/videkah/bin/vimrc_khoskin
+
+
+
+"source $HOME/.vim/vimrc_git_diff_only
+
+"source $HOME/.vim/plugin/grammarian.vim
+

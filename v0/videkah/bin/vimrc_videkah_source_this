@@ -1,0 +1,16 @@
+
+map <f8> :qa<cr>
+
+"this is the file that should be sourced by your main $HOME/.vimrc i.e.
+
+"source $HOME/.vim/videkah/bin/vimrc_videkah_source_this
+
+" this then conditionally includes all the videkah vimrc stuff depending on
+" whether you have opened the buffer :-
+let g:videkah_config_buffer_name = '.videkah/config'
+
+" includes this file with
+if ( bufnr(g:videkah_config_buffer_name) != -1 )
+    source $HOME/.vim/videkah/bin/vimrc_videkah
+endif
+
