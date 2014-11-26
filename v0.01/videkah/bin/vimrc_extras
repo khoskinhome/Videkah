@@ -95,10 +95,6 @@ set ruler                           "Show cursor location info on status line
 "" nnoremap <Space> <PageDown>
 
 
-
-
-
-
 "=====[ Enable smartwrapping ]==================================
 
 " No smartwrapping in any of these files...
@@ -146,11 +142,6 @@ set tabpagemax=15
 map   <C-up> <C-y>
 map   <C-down> <C-e>
 
-
-"complete and utter rubbish that should get an error
-" the flicking between tabs is controlled well by the TAB key !!!!!
-"map   <F4>  :tabprevious<cr>:echo @%<cr>
-"map   <F3>  :tabnext<cr>:echo @%<cr>
 
 
 let &titlestring = $TITLE
@@ -238,20 +229,20 @@ endfunction
 
 " Temporarily add a column indicator when inserting or appending in visual mode...
 " (Should use <C-O> instead, but it doesn't seem to work)
-vnoremap <silent>  I  I<C-R>=TemporaryColumnMarkerOn()<CR>
-vnoremap <silent>  A  A<C-R>=TemporaryColumnMarkerOn()<CR>
+"vnoremap <silent>  I  I<C-R>=TemporaryColumnMarkerOn()<CR>
+"vnoremap <silent>  A  A<C-R>=TemporaryColumnMarkerOn()<CR>
 
-function! TemporaryColumnMarkerOn ()
-    let g:prev_cursorcolumn_state = g:cursorcolumn_visible ? 'on' : 'off'
-    call Toggle_CursorColumn('on')
-    inoremap <silent>  <ESC>  <ESC>:call TemporaryColumnMarkerOff(g:prev_cursorcolumn_state)<CR>
-    return ""
-endfunction
+"function! TemporaryColumnMarkerOn ()
+"    let g:prev_cursorcolumn_state = g:cursorcolumn_visible ? 'on' : 'off'
+"    call Toggle_CursorColumn('on')
+"    inoremap <silent>  <ESC>  <ESC>:call TemporaryColumnMarkerOff(g:prev_cursorcolumn_state)<CR>
+"    return ""
+"endfunction
 
-function! TemporaryColumnMarkerOff (newstate)
-    call Toggle_CursorColumn(a:newstate)
-    iunmap <ESC>
-endfunction
+"function! TemporaryColumnMarkerOff (newstate)
+"    call Toggle_CursorColumn(a:newstate)
+"    iunmap <ESC>
+"endfunction
 
 "==== configure the cursor
 
@@ -270,140 +261,6 @@ map   <S-tab>  :bprev<cr>:echo @%<cr>
 
 " tab = next tab
 map   <tab>    :bnext<cr>:echo @%<cr>
-
-
-"#########################################################################
-" function f keys :-
-" f2 = (echo) show current file name
-map  <f2>     :echo @%<cr>
-
-nmap <F3><f3> :buffers<cr>:b<Space>
-nmap <f3> :b #<cr>
-
-" the show-file-subs button
-map  <F4>  :TlistToggle<cr>
-"let Tlist_File_Fold_Auto_Close = 1
-" following line opens with list TlistToggle on
-"let Tlist_Auto_Open = 1
-
-map  <f5>  :tabnew .<cr>
-
-map <f6> :q<cr>
-"map <leader><f6> :qa<cr>
-
-"map <f7> :!clear;cplist2RELEASE;cp /home/khoskin/runlist/rt182740-newUnFeb13 /home/khoskin/devweb-root-mount/export/home/khoskin/restartPOOL/RUNSTUFF<cr>
-"map <f7> :!clear;cplist2RELEASE;. /etc/bash_completion.d/git;runlist "`__git_ps1`"<cr>
-"map <f7> :!clear;cplist2RELEASE touch;cplist2HEAD touch<cr>
-"map <s-f7> :!clear;cplist2HEAD touch<cr>
-"map <f7> :!clear;cplist2TEST touch<cr>
-"map <f7> :!clear;cplist2HEAD touch<cr>
-"map <f7> :!clear;cplist2RELEASE touch<cr>
-"map <f7> :!clear;cplist2chef52 touch<cr>
-map <f7> :!clear;cplist2chef51 touch<cr>
-
-" TODO need a prompt for the cplist2 options . I need to be able to deploy to more than one codeinst
-" in fact F7 could be a "run" command. and somewhere in videkah there is a list of commands to run.
-" some of these could be for deploying the code , others for well whatever script we want to regularly run.
-
-
-"" map <f8> and <f8><f8> has videkah specific connitations . so that has moved to the videkah section
-
-"map <c-s> :w<cr>
-map <f9> :w<cr>
-
-" f11 , also leader-e . e for explorer, as in file explorer.
-map <f11>     :NERDTree<cr>
-
-
-set pastetoggle=<F12>
-map <Leader>i :set paste<cr>i
-
-
-" <Leader>a is used by perlstacktrace "add" point.
-
-" Leader commands
-" leader-b show-buffers
-"map <Leader>b :buffers<cr>:b<Space>
-map <Leader>b :b#<cr>
-
-map <Leader>ca :%s/^/#/g<cr>:%s/^#\+/#/g<cr>
-
-" leader-e : e for file explorer
-map <Leader>e :NERDTree<cr>
-
-" a way using <Leader>f to search for the last search string and find the next open buffer with the last search string, and open that buffer.
-
-
-"nmap <Leader><Leader><left> :echo "L L left !!!"
-
-
-" leader-h no-syntax-highlighting . also known as 'hugo' button ( hence h )
-map <Leader>h :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax on <Bar> endif <CR>:echo @%<cr>
-
-" leader-k : 'debug looking here' line
-map <Leader>k <esc>0i# debug looking here # TODO rm this line<cr><esc>
-map <Leader>l /debug looking here<cr>
-
-
-map <Leader>g :call GitBlame(@%)<cr>
-function! GitBlame (filename)
-   echo "BLHAAHAHHAHA " 
-    exec '!git blame -w '.a:filename
-endfunction
-
-" <Leader>m is being used to toggle mouse usage below.
-
-" leader-n : line numbering
-map <Leader>n :set invnumber<cr>
-
-" leader-o : re-open-file
-map <Leader>o :e.<cr>
-
-" leader-p : shebang perl line . with a use strict ,  warnings n Data::Dumper.
-map <Leader>p <esc>1G0i#!/usr/bin/perl<cr>use warnings;<cr>use strict;<cr>use 5.14.2;<cr>use Data::Dumper;<cr><esc>
-map <Leader>pp <esc>1G0ipackage  ;<cr>use warnings;<cr>use strict;<cr>use Data::Dumper;<cr><esc>
-
-" leader-q : quit
-map <Leader>q :quit<cr>
-
-nmap <Leader>r <esc>A # TODO rm this line<cr><esc>
-
-" leader-s : see below
-" leader-t : terminal , well ConqueTerm-Bash terminal.
-map <leader>t :ConqueTerm bash<cr>
-map tt :ConqueTerm bash<cr>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" splitting windows, and nav between the windows.
-" leader-s : split window horizontally
-map <Leader>s :split<cr>
-" leader-v : split window vertically
-map <Leader>v :vsplit<cr>
-"" this doesn't work :map <1-LeftMouse>v :vsplit<cr>
-
-"alt-s   strip trailing spaces
-"map <S-F12> :%s/\s\+$//
-
-" move with ctrl up or down ( when you have split windows )
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" toggle the pesky mouse functionality
-nnoremap mm :call ToggleMouse()<CR>
-nnoremap <leader>m :call ToggleMouse()<CR>
-
-function! ToggleMouse()
-  if &mouse == 'a'
-    set mouse=
-    echo "Mouse usage disabled"
-  else
-    set mouse=a
-    echo "Mouse usage enabled"
-  endif
-endfunction
 
 "map <s-f12> :call BrowserRTTicket ()<CR>
 "map <f12> :call Browser ()<CR>

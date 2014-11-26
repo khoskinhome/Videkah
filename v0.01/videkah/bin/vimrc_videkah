@@ -141,6 +141,7 @@ let g:videkah_config_value = []
 " the dir at videkah startup.
 let g:videkah_start_dir = getcwd()
 
+" we need autowrite, the buffer swapping in videkah is painful without it.
 set autowrite       "Save buffer automatically when changing files
 
 augroup videkah
@@ -150,9 +151,25 @@ augroup END
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" videkah <f-key> mappings
+""""""""""""""""""""""""""
 " the following line is also duplicated in the file that sources this one :-
-map <f8> :qa<cr>
+" map <f8> :qa<cr>
 map <f8><f8> :call QuitAndReloadVidekah()<cr>
+""""
+"map <f7> :!clear;cplist2RELEASE;cp /home/khoskin/runlist/rt182740-newUnFeb13 /home/khoskin/devweb-root-mount/export/home/khoskin/restartPOOL/RUNSTUFF<cr>
+"map <f7> :!clear;cplist2RELEASE;. /etc/bash_completion.d/git;runlist "`__git_ps1`"<cr>
+"map <f7> :!clear;cplist2RELEASE touch;cplist2HEAD touch<cr>
+"map <s-f7> :!clear;cplist2HEAD touch<cr>
+"map <f7> :!clear;cplist2TEST touch<cr>
+"map <f7> :!clear;cplist2HEAD touch<cr>
+"map <f7> :!clear;cplist2RELEASE touch<cr>
+"map <f7> :!clear;cplist2chef52 touch<cr>
+map  <f7> :!clear;cplist2chef51 touch<cr>
+" TODO <f7> needs to map to a generic "run this option" function.
+" TODO need a prompt for the cplist2 options . I need to be able to deploy to more than one codeinst
+" in fact F7 could be a "run" command. and somewhere in videkah there is a list of commands to run.
+" some of these could be for deploying the code , others for well whatever script we want to regularly run.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vmap <return> :call OpenSomethingFromVisualSelection_n_Enter()<cr>
@@ -161,8 +178,6 @@ vmap <return><return> :call SearchForVisualSelection_with_ackgrep()<cr>
 " 1 should be the filelist
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
 
 function! SelectNext_videkah_special_buffer()
     if ! IsVidekahMode()

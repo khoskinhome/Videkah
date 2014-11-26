@@ -10,16 +10,24 @@
 #######################
 
 #vimrc files :-
+./videkah/vimrc_todo:1: Just TODO items for the vimrc.
+
 ./videkah/vimrc_in_home:1:  # the one that is either symlinked to from ~/.vimrc or sourced in there.
 
-./videkah/bin/vimrc_extras
 
+# vim can source the following even when not in videkah mode.
+./videkah/bin/vimrc_function_key_map
+
+
+# the vimrc_videkah_source_this
+#       conditionally sources vimrc_videkah
+#       sources all the other vimrc files.
 ./videkah/bin/vimrc_videkah_source_this
-# the vimrc_videkah_source_this conditionally sources vimrc_videkah
+
+
+./videkah/bin/vimrc_extras
 ./videkah/bin/vimrc_videkah
-
-
-./videkah/bin/vimrc_khoskin
+./videkah/bin/vimrc_videkah_iab_debug
 
 ######################################
 # Bash shell script to start videkah :-

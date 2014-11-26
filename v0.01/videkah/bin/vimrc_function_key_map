@@ -1,0 +1,140 @@
+"#########################################################################
+" function f keys :-
+
+" f1 is help in gnome terminal and hard to use.
+
+" f2 = (echo) show current file name
+map  <f2>     :echo @%<cr>
+
+" <f3><f3> show me the buffer list :-
+nmap <F3><f3> :buffers<cr>:b<Space>
+" <f3> switch buffers :-
+nmap <f3>     :b #<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" ~/.vim/plugin/taglist.vim STUFF. Nought to do with videkah.
+" this is to do with the plugin TagList, nothing to do with videkah, and is in ~/.vim/plugin/taglist.vim
+" TODO find a better place for these non-videkah key mappings.
+" the show-file-subs button
+map  <F4>  :TlistToggle<cr>
+"let Tlist_File_Fold_Auto_Close = 1
+" following line opens with list TlistToggle on
+"let Tlist_Auto_Open = 1
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree , nought to do with videkah  ( also leader-e . e for explorer, as in file explorer.)
+" ~/.vim/plugin/NERD_tree.vim
+map <f5>      :NERDTree<cr>
+map <Leader>e :NERDTree<cr>
+" TODO find a better place for these non-videkah key mappings.
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+" f6 unused
+
+" f7 is defined in vimrc_videkah, because it is used in videkah for running stuff (like deploying code with some script)
+
+" f8 is the quitter or quit-and-reload key
+map <f8> :qa<cr>
+" <f8><f8> calls a videkah quit-and-reload function . so that has moved to the vimrc_videkah
+
+map <f9> :w<cr>
+
+" f10 shows up the gnome file-edit-view-etc... menus and is hard to use by vim
+" f11 is full screen in gnome terminal and is hard to use by vim
+
+" <f12> toggle paste mode in vim
+set pastetoggle=<F12>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" <Leader> key stuff.
+"""""""""""""""""""""
+
+" <Leader>a is used by perlstacktrace "add" point.
+
+map <Leader>b :echo "unused"<cr>
+
+map <Leader>c :echo "unused"<cr>
+
+""""" YUCK ! " map <Leader>ca :%s/^/#/g<cr>:%s/^#\+/#/g<cr>
+
+map <Leader>d :echo "unused"<cr>
+
+" <leader>e is used for NERDTree's file explorer, search for NERDTree in this file.
+
+map <Leader>f :echo "unused"<cr>
+" <Leader>f TODO a way of searching for the last search string and find the next open buffer with the last search string, and open that buffer.
+
+map <Leader>g :call GitBlame(@%)<cr>
+" TODO some better way of having the synchronised buffers like bedwards has.
+function! GitBlame (filename)
+   echo "BLHAAHAHHAHA " 
+    exec '!git blame -w '.a:filename
+endfunction
+
+" leader-h no-syntax-highlighting . also known as 'hugo' button ( hence h )
+map <Leader>h :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax on <Bar> endif <CR>:echo @%<cr>
+
+" TODO , what the frick does set paste do ? FIND OUT !
+map <Leader>i :echo "unused"<cr>
+" map <Leader>i :set paste<cr>i
+
+map <Leader>j :echo "unused"<cr>
+map <Leader>k :echo "unused"<cr>
+""""" map <Leader>l /videkah looking here<cr> " is already defined elsewhere in the vimrc_videkah_iab_debug
+
+" <Leader>m is being used to toggle mouse usage below.
+
+" leader-n : line numbering
+map <Leader>n :set invnumber<cr>
+
+" leader-o : re-open-file
+map <Leader>o :e.<cr>
+
+map <Leader>p :echo "unused"<cr>
+
+" leader-q : quit . sorta superceded by <f8>. Who wants to type 2 keys ?
+map <Leader>q :quit<cr>
+
+nmap <Leader>r <esc>A # TODO rm this line<cr><esc>
+
+" leader-s : see below
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" splitting windows, and nav between the windows.
+" leader-s : split window horizontally
+map <Leader>s :split<cr>
+" leader-v : split window vertically
+map <Leader>v :vsplit<cr>
+"" this doesn't work :map <1-LeftMouse>v :vsplit<cr>
+
+map <Leader>p :echo "unused"<cr>
+map <Leader>p :echo "unused"<cr>
+map <Leader>p :echo "unused"<cr>
+map <Leader>p :echo "unused"<cr>
+map <Leader>p :echo "unused"<cr>
+map <Leader>p :echo "unused"<cr>
+"alt-s   strip trailing spaces
+"map <S-F12> :%s/\s\+$//
+
+" move with ctrl up or down ( when you have split windows )
+nmap <silent> <A-Up> :wincmd k<CR>
+nmap <silent> <A-Down> :wincmd j<CR>
+nmap <silent> <A-Left> :wincmd h<CR>
+nmap <silent> <A-Right> :wincmd l<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" toggle the pesky mouse functionality
+nnoremap mm :call ToggleMouse()<CR>
+nnoremap <leader>m :call ToggleMouse()<CR>
+
+function! ToggleMouse()
+  if &mouse == 'a'
+    set mouse=
+    echo "Mouse usage disabled"
+  else
+    set mouse=a
+    echo "Mouse usage enabled"
+  endif
+endfunction
+
+
