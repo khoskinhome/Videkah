@@ -11,9 +11,11 @@ iab vhbb #!/bin/bash<CR>
 
 " vhbp  = videkah perl hash bang line
 iab vhbp <ESC>1G0i#!/usr/bin/perl<CR>use strict;<CR>use warnings;<CR>
+iab vperl <ESC>1G0i#!/usr/bin/perl<CR>use strict;<CR>use warnings;<CR>
 
 " vppack = videkah perl package file header.
-iab vppack <esc>1G0ipackage     ;<cr>use warnings;<cr>use strict;<cr>use Data::Dumper;<cr><esc>
+iab vpack <esc>1G0ipackage     ;<cr>use warnings;<cr>use strict;<cr>use Data::Dumper;<cr><esc>
+iab vpackage <esc>1G0ipackage     ;<cr>use warnings;<cr>use strict;<cr>use Data::Dumper;<cr><esc>
 
 " vpdd  = videkah perl data dumper
 iab vpdd <ESC>0iuse Data::Dumper;print STDERR "\nvidekahnum dumper of   =".Dumper (); # TODO rm this line<cr><ESC>klllllllllllllllllllllllllllllllllllllllllllllllllllllli
@@ -37,8 +39,8 @@ iab vprmthis <ESC>A # TODO rm this line<cr>
 iab vplh <esc>0i  #### videkah looking here. # TODO rm this line<cr><ESC>i
 map <Leader>l /videkah looking here<cr>
 
-" vppod  = videkah perl pod
-iab vppod <ESC>0i<cr>=item head2<cr><cr>B<Description><cr><cr>B<Parameters><cr><cr>=over<cr><cr>=item C<...><cr><cr>=back<cr><cr>B<Returns><cr><cr>B<Throws><cr><cr>=cut<cr><cr><esc>0kkkkkkkkkkkkkkkkkkki
+" vpod  = videkah perl pod
+iab vpod <ESC>0i<cr>=item head2<cr><cr>B<Description><cr><cr>B<Parameters><cr><cr>=over<cr><cr>=item C<...><cr><cr>=back<cr><cr>B<Returns><cr><cr>B<Throws><cr><cr>=cut<cr><cr><esc>0kkkkkkkkkkkkkkkkkkki
 
 " vptr  = videkah perl trace
 iab vptr     <ESC>0i<cr>use Devel::StackTrace; print STDERR Devel::StackTrace->new->as_string; # TODO rm this line<cr><ESC>i
@@ -63,9 +65,9 @@ iab vptests   <ESC>0i<cr>use Test::Simple 'no_plan';<cr><esc>i
 iab vptestm   <ESC>0i<cr>use Test::More 'no_plan';<cr>use Test::Deep;<cr><esc>i
 
 " vp  = videkah perl pause . i.e. wait for some user STDIN typing .
-iab vppause   <ESC>0i<cr>print STDERR "\nvidekahnum . paused . ctrl-d to continue\n"; @crap=<STDIN>; # TODO rm this line<cr><ESC>i
+iab vpause   <ESC>0i<cr>print STDERR "\nvidekahnum . paused . ctrl-d to continue\n"; @crap=<STDIN>; # TODO rm this line<cr><ESC>i
 " vp  = videkah perl pause , with the my
-iab vppausemy <ESC>0i<cr>my @crap; # TODO rm this line<cr>print STDERR "\nvidekahnum . paused . ctrl-d to continue\n"; @crap=<STDIN> ; # TODO rm this line<cr><ESC>i
+iab vpausemy <ESC>0i<cr>my @crap; # TODO rm this line<cr>print STDERR "\nvidekahnum . paused . ctrl-d to continue\n"; @crap=<STDIN> ; # TODO rm this line<cr><ESC>i
 
 " the following is a Venda-r-ism ....
 " vp  = videkah perl do not run in transaction function

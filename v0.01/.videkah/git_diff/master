@@ -1,359 +1,40 @@
-diff --git a/v0.01/.videkah/filelist/master b/v0.01/.videkah/filelist/master
-index a72fece..e55a865 100644
---- a/v0.01/.videkah/filelist/master
-+++ b/v0.01/.videkah/filelist/master
-@@ -1,4 +1,4 @@
--
-+crap
- ################################
- ## Tue Nov 25 23:32:39 GMT 2014
- # general files , docs, install :-
-@@ -14,18 +14,16 @@
+diff --git a/v0.01/videkah/bin/vimrc_videkah_iab_debug b/v0.01/videkah/bin/vimrc_videkah_iab_debug
+index c2493a3..e294bfe 100644
+--- a/v0.01/videkah/bin/vimrc_videkah_iab_debug
++++ b/v0.01/videkah/bin/vimrc_videkah_iab_debug
+@@ -11,9 +11,11 @@ iab vhbb #!/bin/bash<CR>
  
- ./videkah/vimrc_in_home:1:  # the one that is either symlinked to from ~/.vimrc or sourced in there.
+ " vhbp  = videkah perl hash bang line
+ iab vhbp <ESC>1G0i#!/usr/bin/perl<CR>use strict;<CR>use warnings;<CR>
++iab vperl <ESC>1G0i#!/usr/bin/perl<CR>use strict;<CR>use warnings;<CR>
  
--
--# vim can source the following even when not in videkah mode.
--./videkah/bin/vimrc_function_key_map
--
--
- # the vimrc_videkah_source_this
--#       conditionally sources vimrc_videkah
--#       sources all the other vimrc files.
-+#       conditionally sources vimrc_videkah_* files
-+#       sources all the other vimrc_* files.
- ./videkah/bin/vimrc_videkah_source_this
+ " vppack = videkah perl package file header.
+-iab vppack <esc>1G0ipackage     ;<cr>use warnings;<cr>use strict;<cr>use Data::Dumper;<cr><esc>
++iab vpack <esc>1G0ipackage     ;<cr>use warnings;<cr>use strict;<cr>use Data::Dumper;<cr><esc>
++iab vpackage <esc>1G0ipackage     ;<cr>use warnings;<cr>use strict;<cr>use Data::Dumper;<cr><esc>
  
--
-+# vim can source the following even when not in videkah mode.
-+./videkah/bin/vimrc_main_key_map
- ./videkah/bin/vimrc_extras
-+
-+# the files that are only sourced in videkah mode.
- ./videkah/bin/vimrc_videkah
- ./videkah/bin/vimrc_videkah_iab_debug
+ " vpdd  = videkah perl data dumper
+ iab vpdd <ESC>0iuse Data::Dumper;print STDERR "\nvidekahnum dumper of   =".Dumper (); # TODO rm this line<cr><ESC>klllllllllllllllllllllllllllllllllllllllllllllllllllllli
+@@ -37,8 +39,8 @@ iab vprmthis <ESC>A # TODO rm this line<cr>
+ iab vplh <esc>0i  #### videkah looking here. # TODO rm this line<cr><ESC>i
+ map <Leader>l /videkah looking here<cr>
  
-diff --git a/v0.01/.videkah/perl_stacktrace/master b/v0.01/.videkah/perl_stacktrace/master
-index e69de29..6203fed 100644
---- a/v0.01/.videkah/perl_stacktrace/master
-+++ b/v0.01/.videkah/perl_stacktrace/master
-@@ -0,0 +1 @@
-+ERROR . the libpath './lib/' either doesn't exist or isn't a directory  at /home/khoskin/.vim/videkah/bin/videkah_perlstacktrace.pl line 45, <> line 2.
-diff --git a/v0.01/videkah/bin/vimrc_function_key_map b/v0.01/videkah/bin/vimrc_function_key_map
-deleted file mode 100644
-index fa6b0ac..0000000
---- a/v0.01/videkah/bin/vimrc_function_key_map
-+++ /dev/null
-@@ -1,140 +0,0 @@
--"#########################################################################
--" function f keys :-
--
--" f1 is help in gnome terminal and hard to use.
--
--" f2 = (echo) show current file name
--map  <f2>     :echo @%<cr>
--
--" <f3><f3> show me the buffer list :-
--nmap <F3><f3> :buffers<cr>:b<Space>
--" <f3> switch buffers :-
--nmap <f3>     :b #<cr>
--
--
--"""""""""""""""""""""""""""""""""""""""""""""""""
--" ~/.vim/plugin/taglist.vim STUFF. Nought to do with videkah.
--" this is to do with the plugin TagList, nothing to do with videkah, and is in ~/.vim/plugin/taglist.vim
--" TODO find a better place for these non-videkah key mappings.
--" the show-file-subs button
--map  <F4>  :TlistToggle<cr>
--"let Tlist_File_Fold_Auto_Close = 1
--" following line opens with list TlistToggle on
--"let Tlist_Auto_Open = 1
--"""""""""""""""""""""""""""""""""""""""""""""""""
--" NERDTree , nought to do with videkah  ( also leader-e . e for explorer, as in file explorer.)
--" ~/.vim/plugin/NERD_tree.vim
--map <f5>      :NERDTree<cr>
--map <Leader>e :NERDTree<cr>
--" TODO find a better place for these non-videkah key mappings.
--"""""""""""""""""""""""""""""""""""""""""""""""""
--
--" f6 unused
--
--" f7 is defined in vimrc_videkah, because it is used in videkah for running stuff (like deploying code with some script)
--
--" f8 is the quitter or quit-and-reload key
--map <f8> :qa<cr>
--" <f8><f8> calls a videkah quit-and-reload function . so that has moved to the vimrc_videkah
--
--map <f9> :w<cr>
--
--" f10 shows up the gnome file-edit-view-etc... menus and is hard to use by vim
--" f11 is full screen in gnome terminal and is hard to use by vim
--
--" <f12> toggle paste mode in vim
--set pastetoggle=<F12>
--
--""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
--" <Leader> key stuff.
--"""""""""""""""""""""
--
--" <Leader>a is used by perlstacktrace "add" point.
--
--map <Leader>b :echo "unused"<cr>
--
--map <Leader>c :echo "unused"<cr>
--
--""""" YUCK ! " map <Leader>ca :%s/^/#/g<cr>:%s/^#\+/#/g<cr>
--
--map <Leader>d :echo "unused"<cr>
--
--" <leader>e is used for NERDTree's file explorer, search for NERDTree in this file.
--
--map <Leader>f :echo "unused"<cr>
--" <Leader>f TODO a way of searching for the last search string and find the next open buffer with the last search string, and open that buffer.
--
--map <Leader>g :call GitBlame(@%)<cr>
--" TODO some better way of having the synchronised buffers like bedwards has.
--function! GitBlame (filename)
--   echo "BLHAAHAHHAHA " 
--    exec '!git blame -w '.a:filename
--endfunction
--
--" leader-h no-syntax-highlighting . also known as 'hugo' button ( hence h )
--map <Leader>h :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax on <Bar> endif <CR>:echo @%<cr>
--
--" TODO , what the frick does set paste do ? FIND OUT !
--map <Leader>i :echo "unused"<cr>
--" map <Leader>i :set paste<cr>i
--
--map <Leader>j :echo "unused"<cr>
--map <Leader>k :echo "unused"<cr>
--""""" map <Leader>l /videkah looking here<cr> " is already defined elsewhere in the vimrc_videkah_iab_debug
--
--" <Leader>m is being used to toggle mouse usage below.
--
--" leader-n : line numbering
--map <Leader>n :set invnumber<cr>
--
--" leader-o : re-open-file
--map <Leader>o :e.<cr>
--
--map <Leader>p :echo "unused"<cr>
--
--" leader-q : quit . sorta superceded by <f8>. Who wants to type 2 keys ?
--map <Leader>q :quit<cr>
--
--nmap <Leader>r <esc>A # TODO rm this line<cr><esc>
--
--" leader-s : see below
--
--"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
--" splitting windows, and nav between the windows.
--" leader-s : split window horizontally
--map <Leader>s :split<cr>
--" leader-v : split window vertically
--map <Leader>v :vsplit<cr>
--"" this doesn't work :map <1-LeftMouse>v :vsplit<cr>
--
--map <Leader>p :echo "unused"<cr>
--map <Leader>p :echo "unused"<cr>
--map <Leader>p :echo "unused"<cr>
--map <Leader>p :echo "unused"<cr>
--map <Leader>p :echo "unused"<cr>
--map <Leader>p :echo "unused"<cr>
--"alt-s   strip trailing spaces
--"map <S-F12> :%s/\s\+$//
--
--" move with ctrl up or down ( when you have split windows )
--nmap <silent> <A-Up> :wincmd k<CR>
--nmap <silent> <A-Down> :wincmd j<CR>
--nmap <silent> <A-Left> :wincmd h<CR>
--nmap <silent> <A-Right> :wincmd l<CR>
--
--"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
--" toggle the pesky mouse functionality
--nnoremap mm :call ToggleMouse()<CR>
--nnoremap <leader>m :call ToggleMouse()<CR>
--
--function! ToggleMouse()
--  if &mouse == 'a'
--    set mouse=
--    echo "Mouse usage disabled"
--  else
--    set mouse=a
--    echo "Mouse usage enabled"
--  endif
--endfunction
--
--
-diff --git a/v0.01/videkah/bin/vimrc_main_key_map b/v0.01/videkah/bin/vimrc_main_key_map
-new file mode 100644
-index 0000000..895aded
---- /dev/null
-+++ b/v0.01/videkah/bin/vimrc_main_key_map
-@@ -0,0 +1,144 @@
-+""""""""""""""""""""""""""""""""""""""""
-+" function f keys :-
-+"""""""""""""""""
-+
-+" f1 is help in gnome terminal and hard to use.
-+
-+" f2 = (echo) show current file name
-+nnoremap <f2>     :echo @%<cr>
-+
-+" <f3><f3> show me the buffer list :-
-+nnoremap <F3><f3> :buffers<cr>:b<Space>
-+" <f3> switch buffers :-
-+nnoremap <f3>     :b #<cr>
-+
-+""""""""""""""""""
-+" ~/.vim/plugin/taglist.vim STUFF. Nought to do with videkah.
-+" this is to do with the plugin TagList, nothing to do with videkah, and is in ~/.vim/plugin/taglist.vim
-+" TODO find a better place for these non-videkah key mappings.
-+" the show-file-subs button
-+nnoremap  <F4>  :TlistToggle<cr>
-+"let Tlist_File_Fold_Auto_Close = 1
-+" following line opens with list TlistToggle on
-+"let Tlist_Auto_Open = 1
-+""""""""""""""""""
-+" NERDTree , nought to do with videkah  ( also leader-e . e for explorer, as in file explorer.)
-+" ~/.vim/plugin/NERD_tree.vim
-+nnoremap <f5>      :NERDTree<cr>
-+nnoremap <Leader>e :NERDTree<cr>
-+" TODO find a better place for these non-videkah key mappings.
-+""""""""""""""""""
-+
-+" f6 quit
-+nnoremap <f6> :q<cr>
-+
-+" f7 is defined in vimrc_videkah, because it is used in videkah for running stuff (like deploying code with some script)
-+
-+" f8 is the quitter or quit-and-reload key
-+nnoremap <f8> :qa<cr>
-+" <f8><f8> calls a videkah quit-and-reload function . so that has moved to the vimrc_videkah
-+
-+nnoremap <f9> :w<cr>
-+
-+" f10 shows up the gnome file-edit-view-etc... menus and is hard to use by vim
-+" f11 is full screen in gnome terminal and is hard to use by vim
-+
-+" <f12> toggle paste mode in vim
-+set pastetoggle=<F12>
-+
-+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-+" <Leader> key stuff.
-+"""""""""""""""""""""
-+
-+" <Leader>a is used by perlstacktrace "add" point.
-+
-+nnoremap <Leader>b :echo "leader b unused"<cr>
-+
-+nnoremap <Leader>c :echo "leader c unused"<cr>
-+
-+""""" YUCK ! " map <Leader>ca :%s/^/#/g<cr>:%s/^#\+/#/g<cr>
-+
-+nnoremap <Leader>d :echo "leader d unused"<cr>
-+
-+" <leader>e is used for NERDTree's file explorer, search for NERDTree in this file.
-+
-+nnoremap <Leader>f :echo "leader f unused"<cr>
-+" <Leader>f TODO a way of searching for the last search string and find the next open buffer with the last search string, and open that buffer.
-+
-+nnoremap <Leader>g :call GitBlame(@%)<cr>
-+" TODO some better way of having the synchronised buffers like bedwards has.
-+function! GitBlame (filename)
-+   echo "BLHAAHAHHAHA " 
-+    exec '!git blame -w '.a:filename
-+endfunction
-+
-+" leader-h no-syntax-highlighting . also known as 'hugo' button ( hence h )
-+nnoremap <Leader>h :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax on <Bar> endif <CR>:echo @%<cr>
-+
-+" TODO , what the frick does set paste do ? FIND OUT !
-+nnoremap <Leader>i :echo "leader i unused"<cr>
-+" map <Leader>i :set paste<cr>i
-+
-+nnoremap <Leader>j :echo "leader j unused"<cr>
-+
-+nnoremap <Leader>k :echo "leader k unused"<cr>
-+
-+""""" <Leader>l /videkah looking here<cr> " is already defined elsewhere in the vimrc_videkah_iab_debug
-+
-+" <Leader>m is being used to toggle mouse usage below.
-+
-+" leader-n : line numbering
-+nnoremap <Leader>n :set invnumber<cr>
-+
-+" leader-o : re-open-file
-+nnoremap <Leader>o :e<cr>
-+
-+nnoremap <Leader>p :echo "leader p unused"<cr>
-+
-+nnoremap <Leader>q :echo "leader q unused"<cr>
-+
-+nnoremap <Leader>r <esc>A # TODO rm this line<cr><esc>
-+
-+" leader-s : see below
-+
-+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-+" splitting windows, and nav between the windows.
-+" leader-s : split window horizontally
-+nnoremap <Leader>s :split<cr>
-+
-+nnoremap <Leader>t :echo "leader t unused"<cr>
-+nnoremap <Leader>u :echo "leader u unused"<cr>
-+
-+" leader-v : split window vertically
-+nnoremap <Leader>v :vsplit<cr>
-+"" this doesn't work :map <1-LeftMouse>v :vsplit<cr>
-+
-+nnoremap <Leader>w :echo "leader w unused"<cr>
-+nnoremap <Leader>x :echo "leader x unused"<cr>
-+nnoremap <Leader>y :echo "leader y unused"<cr>
-+nnoremap <Leader>z :echo "leader z unused"<cr>
-+"alt-s   strip trailing spaces
-+"map <S-F12> :%s/\s\+$//
-+
-+" move with ctrl up or down ( when you have split windows )
-+nnoremap <silent> <A-Up> :wincmd k<CR>
-+nnoremap <silent> <A-Down> :wincmd j<CR>
-+nnoremap <silent> <A-Left> :wincmd h<CR>
-+nnoremap <silent> <A-Right> :wincmd l<CR>
-+
-+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-+" toggle the pesky mouse functionality
-+nnoremap mm :call ToggleMouse()<CR>
-+nnoremap <leader>m :call ToggleMouse()<CR>
-+
-+function! ToggleMouse()
-+  if &mouse == 'a'
-+    set mouse=
-+    echo "Mouse usage disabled"
-+  else
-+    set mouse=a
-+    echo "Mouse usage enabled"
-+  endif
-+endfunction
-+
-+
-diff --git a/v0.01/videkah/bin/vimrc_videkah_source_this b/v0.01/videkah/bin/vimrc_videkah_source_this
-index 9b6f48e..36d83c9 100644
---- a/v0.01/videkah/bin/vimrc_videkah_source_this
-+++ b/v0.01/videkah/bin/vimrc_videkah_source_this
-@@ -1,6 +1,7 @@
+-" vppod  = videkah perl pod
+-iab vppod <ESC>0i<cr>=item head2<cr><cr>B<Description><cr><cr>B<Parameters><cr><cr>=over<cr><cr>=item C<...><cr><cr>=back<cr><cr>B<Returns><cr><cr>B<Throws><cr><cr>=cut<cr><cr><esc>0kkkkkkkkkkkkkkkkkkki
++" vpod  = videkah perl pod
++iab vpod <ESC>0i<cr>=item head2<cr><cr>B<Description><cr><cr>B<Parameters><cr><cr>=over<cr><cr>=item C<...><cr><cr>=back<cr><cr>B<Returns><cr><cr>B<Throws><cr><cr>=cut<cr><cr><esc>0kkkkkkkkkkkkkkkkkkki
  
- " function key mappings are good even in non videkah mode.
--source $HOME/.vim/videkah/bin/vimrc_function_key_map
-+source $HOME/.vim/videkah/bin/vimrc_main_key_map
-+source $HOME/.vim/videkah/bin/vimrc_extras
+ " vptr  = videkah perl trace
+ iab vptr     <ESC>0i<cr>use Devel::StackTrace; print STDERR Devel::StackTrace->new->as_string; # TODO rm this line<cr><ESC>i
+@@ -63,9 +65,9 @@ iab vptests   <ESC>0i<cr>use Test::Simple 'no_plan';<cr><esc>i
+ iab vptestm   <ESC>0i<cr>use Test::More 'no_plan';<cr>use Test::Deep;<cr><esc>i
  
- "this is the file that should be sourced by your main $HOME/.vimrc i.e.
+ " vp  = videkah perl pause . i.e. wait for some user STDIN typing .
+-iab vppause   <ESC>0i<cr>print STDERR "\nvidekahnum . paused . ctrl-d to continue\n"; @crap=<STDIN>; # TODO rm this line<cr><ESC>i
++iab vpause   <ESC>0i<cr>print STDERR "\nvidekahnum . paused . ctrl-d to continue\n"; @crap=<STDIN>; # TODO rm this line<cr><ESC>i
+ " vp  = videkah perl pause , with the my
+-iab vppausemy <ESC>0i<cr>my @crap; # TODO rm this line<cr>print STDERR "\nvidekahnum . paused . ctrl-d to continue\n"; @crap=<STDIN> ; # TODO rm this line<cr><ESC>i
++iab vpausemy <ESC>0i<cr>my @crap; # TODO rm this line<cr>print STDERR "\nvidekahnum . paused . ctrl-d to continue\n"; @crap=<STDIN> ; # TODO rm this line<cr><ESC>i
  
-@@ -12,8 +13,6 @@ let g:videkah_config_buffer_name = '.videkah/config'
- 
- " includes this file with
- if ( bufnr(g:videkah_config_buffer_name) != -1 )
--
--    source $HOME/.vim/videkah/bin/vimrc_extras
-     source $HOME/.vim/videkah/bin/vimrc_videkah_iab_debug
-     source $HOME/.vim/videkah/bin/vimrc_videkah
- endif
+ " the following is a Venda-r-ism ....
+ " vp  = videkah perl do not run in transaction function
