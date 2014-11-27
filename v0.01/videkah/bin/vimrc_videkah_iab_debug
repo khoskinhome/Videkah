@@ -78,6 +78,8 @@ nnoremap <Space>n :call RenumberVidekahnumInFile()<cr>
 
 function! RenumberVidekahnumInFile ()
 
+" TODO need to make sure this only runs on buffers that are NOT videkah-buffers.
+
 "    echo '##########################'
 "    echo 'videkahnum-[renum]bering !!!'
 "    echo '##########################'
