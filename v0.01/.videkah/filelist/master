@@ -1,4 +1,4 @@
-
+crap
 ################################
 ## Tue Nov 25 23:32:39 GMT 2014
 # general files , docs, install :-
@@ -14,18 +14,16 @@
 
 ./videkah/vimrc_in_home:1:  # the one that is either symlinked to from ~/.vimrc or sourced in there.
 
-
-# vim can source the following even when not in videkah mode.
-./videkah/bin/vimrc_function_key_map
-
-
 # the vimrc_videkah_source_this
-#       conditionally sources vimrc_videkah
-#       sources all the other vimrc files.
+#       conditionally sources vimrc_videkah_* files
+#       sources all the other vimrc_* files.
 ./videkah/bin/vimrc_videkah_source_this
 
-
+# vim can source the following even when not in videkah mode.
+./videkah/bin/vimrc_main_key_map
 ./videkah/bin/vimrc_extras
+
+# the files that are only sourced in videkah mode.
 ./videkah/bin/vimrc_videkah
 ./videkah/bin/vimrc_videkah_iab_debug
 

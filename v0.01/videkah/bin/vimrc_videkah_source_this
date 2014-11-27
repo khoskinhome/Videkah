@@ -1,6 +1,7 @@
 
 " function key mappings are good even in non videkah mode.
-source $HOME/.vim/videkah/bin/vimrc_function_key_map
+source $HOME/.vim/videkah/bin/vimrc_main_key_map
+source $HOME/.vim/videkah/bin/vimrc_extras
 
 "this is the file that should be sourced by your main $HOME/.vimrc i.e.
 
@@ -12,8 +13,6 @@ let g:videkah_config_buffer_name = '.videkah/config'
 
 " includes this file with
 if ( bufnr(g:videkah_config_buffer_name) != -1 )
-
-    source $HOME/.vim/videkah/bin/vimrc_extras
     source $HOME/.vim/videkah/bin/vimrc_videkah_iab_debug
     source $HOME/.vim/videkah/bin/vimrc_videkah
 endif
