@@ -14,6 +14,8 @@ VIDEKAH_RUNLIST_BY_GIT_BRANCH=1
 # if it isn't defined this defaults to the dir .videkah/git_diff/
 VIDEKAH_GIT_DIFF_DIR=
 VIDEKAH_GIT_DIFF_BY_GIT_BRANCH=1
+
+## VIDEKAH_GIT_DIFF_OFFSET_DIR=./v0.01 ## NOT YET IMPLEMENTED
 ## VIDEKAH_GIT_DIFF_SPEC=HEAD~1  ## NOT YET IMPLEMENTED
 
 # if it isn't defined this defaults to the dir .videkah/perl_stacktrace/
