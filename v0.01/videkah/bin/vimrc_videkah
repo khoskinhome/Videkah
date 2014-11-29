@@ -1925,6 +1925,7 @@ endfunction
 
 
 " TODO  get the <f7> that currently deploys files to give a list of options . lets say a max of from 0 -> 9 (maybe a -> z too ) . These options on what is run will need to be defined in some sort of config somewhere.
+" TODO get a f7 like button to just deploy the current file. Maybe have a single press of f7 deploy the current file. double-press of f7 deploy all files. Deploy would be writing the file(s) to a defined base-dir. The Base-dir would be in the config.
 
 
 " <leader>r currently adds a "# TODO rm this line" on the end of a line. It would be nice to be able to do a visual select on a few lines and be able  to add or remove the suffixed "# TODO rm this line" .
