@@ -35,7 +35,11 @@ nnoremap <f6> :q<cr>
 " f7 is defined in vimrc_videkah, because it is used in videkah for running stuff (like deploying code with some script)
 
 " f8 is the quitter or quit-and-reload key
-nnoremap <f8> :qa<cr>
+nnoremap <f8> :call QuitNSave()<cr>
+function! QuitNSave()
+    exec ":w!"
+    exec ":qa!"
+endfunction 
 " <f8><f8> calls a videkah quit-and-reload function . so that has moved to the vimrc_videkah
 
 nnoremap <f9> :w<cr>

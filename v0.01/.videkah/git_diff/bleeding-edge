@@ -1,0 +1,372 @@
+diff --git a/v0.01/.videkah/filelist/bleeding-edge b/v0.01/.videkah/filelist/bleeding-edge
+new file mode 100644
+index 0000000..6a32a2f
+--- /dev/null
++++ b/v0.01/.videkah/filelist/bleeding-edge
+@@ -0,0 +1,44 @@
++crap
++################################
++## Tue Nov 25 23:32:39 GMT 2014
++# general files , docs, install :-
++./README.INSTALL.TXT
++./videkah/README
++./videkah/bin/README.txt
++./find-all-files.pl
++./install.me.pl
++#######################
++
++#vimrc files :-
++./videkah/vimrc_todo:1: Just TODO items for the vimrc.
++
++./videkah/vimrc_in_home:1:  # the one that is either symlinked to from ~/.vimrc or sourced in there.
++
++# the vimrc_videkah_source_this
++#       conditionally sources vimrc_videkah_* files
++#       sources all the other vimrc_* files.
++./videkah/bin/vimrc_videkah_source_this
++
++# vim can source the following even when not in videkah mode.
++./videkah/bin/vimrc_main_key_map
++./videkah/bin/vimrc_extras
++
++# the files that are only sourced in videkah mode.
++./videkah/bin/vimrc_videkah
++./videkah/bin/vimrc_videkah_iab_debug
++
++######################################
++# Bash shell script to start videkah :-
++./videkah/bin/videkah_khaos
++./videkah/bin/videkah
++
++# perl scripts used by videkah :-
++./videkah/bin/videkah_perl_ackgrep.pl
++./videkah/bin/videkah_perlfindsubinclasses.pl
++./videkah/bin/videkah_perlstacktrace.pl
++./videkah/bin/videkah_generate_config
++./videkah/bin/videkah_find_all_files.pl
++
++
++################################
++
+diff --git a/v0.01/.videkah/git_diff/bleeding-edge b/v0.01/.videkah/git_diff/bleeding-edge
+new file mode 100644
+index 0000000..696995e
+--- /dev/null
++++ b/v0.01/.videkah/git_diff/bleeding-edge
+@@ -0,0 +1,238 @@
++diff --git a/v0.01/.videkah/filelist/bleeding-edge b/v0.01/.videkah/filelist/bleeding-edge
++new file mode 100644
++index 0000000..6a32a2f
++--- /dev/null
+++++ b/v0.01/.videkah/filelist/bleeding-edge
++@@ -0,0 +1,44 @@
+++crap
+++################################
+++## Tue Nov 25 23:32:39 GMT 2014
+++# general files , docs, install :-
+++./README.INSTALL.TXT
+++./videkah/README
+++./videkah/bin/README.txt
+++./find-all-files.pl
+++./install.me.pl
+++#######################
+++
+++#vimrc files :-
+++./videkah/vimrc_todo:1: Just TODO items for the vimrc.
+++
+++./videkah/vimrc_in_home:1:  # the one that is either symlinked to from ~/.vimrc or sourced in there.
+++
+++# the vimrc_videkah_source_this
+++#       conditionally sources vimrc_videkah_* files
+++#       sources all the other vimrc_* files.
+++./videkah/bin/vimrc_videkah_source_this
+++
+++# vim can source the following even when not in videkah mode.
+++./videkah/bin/vimrc_main_key_map
+++./videkah/bin/vimrc_extras
+++
+++# the files that are only sourced in videkah mode.
+++./videkah/bin/vimrc_videkah
+++./videkah/bin/vimrc_videkah_iab_debug
+++
+++######################################
+++# Bash shell script to start videkah :-
+++./videkah/bin/videkah_khaos
+++./videkah/bin/videkah
+++
+++# perl scripts used by videkah :-
+++./videkah/bin/videkah_perl_ackgrep.pl
+++./videkah/bin/videkah_perlfindsubinclasses.pl
+++./videkah/bin/videkah_perlstacktrace.pl
+++./videkah/bin/videkah_generate_config
+++./videkah/bin/videkah_find_all_files.pl
+++
+++
+++################################
+++
++diff --git a/v0.01/.videkah/git_diff/bleeding-edge b/v0.01/.videkah/git_diff/bleeding-edge
++new file mode 100644
++index 0000000..cd5433f
++--- /dev/null
+++++ b/v0.01/.videkah/git_diff/bleeding-edge
++@@ -0,0 +1,104 @@
+++diff --git a/v0.01/.videkah/filelist/bleeding-edge b/v0.01/.videkah/filelist/bleeding-edge
+++new file mode 100644
+++index 0000000..6a32a2f
+++--- /dev/null
++++++ b/v0.01/.videkah/filelist/bleeding-edge
+++@@ -0,0 +1,44 @@
++++crap
++++################################
++++## Tue Nov 25 23:32:39 GMT 2014
++++# general files , docs, install :-
++++./README.INSTALL.TXT
++++./videkah/README
++++./videkah/bin/README.txt
++++./find-all-files.pl
++++./install.me.pl
++++#######################
++++
++++#vimrc files :-
++++./videkah/vimrc_todo:1: Just TODO items for the vimrc.
++++
++++./videkah/vimrc_in_home:1:  # the one that is either symlinked to from ~/.vimrc or sourced in there.
++++
++++# the vimrc_videkah_source_this
++++#       conditionally sources vimrc_videkah_* files
++++#       sources all the other vimrc_* files.
++++./videkah/bin/vimrc_videkah_source_this
++++
++++# vim can source the following even when not in videkah mode.
++++./videkah/bin/vimrc_main_key_map
++++./videkah/bin/vimrc_extras
++++
++++# the files that are only sourced in videkah mode.
++++./videkah/bin/vimrc_videkah
++++./videkah/bin/vimrc_videkah_iab_debug
++++
++++######################################
++++# Bash shell script to start videkah :-
++++./videkah/bin/videkah_khaos
++++./videkah/bin/videkah
++++
++++# perl scripts used by videkah :-
++++./videkah/bin/videkah_perl_ackgrep.pl
++++./videkah/bin/videkah_perlfindsubinclasses.pl
++++./videkah/bin/videkah_perlstacktrace.pl
++++./videkah/bin/videkah_generate_config
++++./videkah/bin/videkah_find_all_files.pl
++++
++++
++++################################
++++
+++diff --git a/v0.01/.videkah/git_diff/bleeding-edge b/v0.01/.videkah/git_diff/bleeding-edge
+++new file mode 100644
+++index 0000000..e69de29
+++diff --git a/v0.01/.videkah/runlist/bleeding-edge b/v0.01/.videkah/runlist/bleeding-edge
+++new file mode 100644
+++index 0000000..ded67fb
+++--- /dev/null
++++++ b/v0.01/.videkah/runlist/bleeding-edge
+++@@ -0,0 +1,2 @@
++++
++++./videkah/bin/videkah_find_all_files.pl
+++diff --git a/v0.01/videkah/bin/videkah_find_all_files.pl b/v0.01/videkah/bin/videkah_find_all_files.pl
+++new file mode 100755
+++index 0000000..1e3c00b
+++--- /dev/null
++++++ b/v0.01/videkah/bin/videkah_find_all_files.pl
+++@@ -0,0 +1,37 @@
++++#!/usr/bin/perl
++++use warnings;
++++use strict;
++++use 5.14.2;
++++use Data::Dumper;
++++
++++# find me all files from the current subdir down and print them out
++++# do not print out directory names.
++++
++++# Khaos 2014-11-22
++++
++++print "\n################################\n";
++++print "## ".qx{date};
++++
++++for my $item (  qx{find ./} ) {
++++    $item = trim($item);
++++
++++    if ( -f $item ) {
++++        if ( $item !~ /\..*?\.swp$/ && $item !~ m{^\./\.videkah/} ) {
++++            print $item."\n";
++++        } else {
++++#            print "SWAPPPPPPP OR Videkah : $item\n";
++++        }
++++    }
++++
++++}
++++
++++print "\n################################\n\n";
++++
++++
++++sub trim {
++++    my ($txt) = @_;
++++    $txt =~ s/^\s*//g;
++++    $txt =~ s/\s*$//g;
++++    return $txt;
++++}
++++
++diff --git a/v0.01/.videkah/runlist/bleeding-edge b/v0.01/.videkah/runlist/bleeding-edge
++new file mode 100644
++index 0000000..ded67fb
++--- /dev/null
+++++ b/v0.01/.videkah/runlist/bleeding-edge
++@@ -0,0 +1,2 @@
+++
+++./videkah/bin/videkah_find_all_files.pl
++diff --git a/v0.01/videkah/bin/videkah_find_all_files.pl b/v0.01/videkah/bin/videkah_find_all_files.pl
++new file mode 100755
++index 0000000..1e3c00b
++--- /dev/null
+++++ b/v0.01/videkah/bin/videkah_find_all_files.pl
++@@ -0,0 +1,37 @@
+++#!/usr/bin/perl
+++use warnings;
+++use strict;
+++use 5.14.2;
+++use Data::Dumper;
+++
+++# find me all files from the current subdir down and print them out
+++# do not print out directory names.
+++
+++# Khaos 2014-11-22
+++
+++print "\n################################\n";
+++print "## ".qx{date};
+++
+++for my $item (  qx{find ./} ) {
+++    $item = trim($item);
+++
+++    if ( -f $item ) {
+++        if ( $item !~ /\..*?\.swp$/ && $item !~ m{^\./\.videkah/} ) {
+++            print $item."\n";
+++        } else {
+++#            print "SWAPPPPPPP OR Videkah : $item\n";
+++        }
+++    }
+++
+++}
+++
+++print "\n################################\n\n";
+++
+++
+++sub trim {
+++    my ($txt) = @_;
+++    $txt =~ s/^\s*//g;
+++    $txt =~ s/\s*$//g;
+++    return $txt;
+++}
+++
++diff --git a/v0.01/videkah/bin/vimrc_main_key_map b/v0.01/videkah/bin/vimrc_main_key_map
++index 895aded..347c269 100644
++--- a/v0.01/videkah/bin/vimrc_main_key_map
+++++ b/v0.01/videkah/bin/vimrc_main_key_map
++@@ -35,7 +35,11 @@ nnoremap <f6> :q<cr>
++ " f7 is defined in vimrc_videkah, because it is used in videkah for running stuff (like deploying code with some script)
++ 
++ " f8 is the quitter or quit-and-reload key
++-nnoremap <f8> :qa<cr>
+++nnoremap <f8> :call QuitNSave()<cr>
+++function! QuitNSave()
+++    exec ":w!"
+++    exec ":qa!"
+++endfunction 
++ " <f8><f8> calls a videkah quit-and-reload function . so that has moved to the vimrc_videkah
++ 
++ nnoremap <f9> :w<cr>
++diff --git a/v0.01/videkah/bin/vimrc_videkah b/v0.01/videkah/bin/vimrc_videkah
++index a0b67e4..44ad064 100644
++--- a/v0.01/videkah/bin/vimrc_videkah
+++++ b/v0.01/videkah/bin/vimrc_videkah
++@@ -1931,4 +1931,4 @@ endfunction
++ 
++ " "# TODO rm this line" needs to be definable. i.e. so it could be "// TODO rm this line" or whatever works in whatever language. currently its hard-coded to perl , and that is BAD . 
++ 
++-echo "Videkah v0.01-2014-11-29-0941"
+++echo "Videkah v0.01-2014-11-29-1114"
+diff --git a/v0.01/.videkah/runlist/bleeding-edge b/v0.01/.videkah/runlist/bleeding-edge
+new file mode 100644
+index 0000000..ded67fb
+--- /dev/null
++++ b/v0.01/.videkah/runlist/bleeding-edge
+@@ -0,0 +1,2 @@
++
++./videkah/bin/videkah_find_all_files.pl
+diff --git a/v0.01/videkah/bin/videkah_find_all_files.pl b/v0.01/videkah/bin/videkah_find_all_files.pl
+new file mode 100755
+index 0000000..1e3c00b
+--- /dev/null
++++ b/v0.01/videkah/bin/videkah_find_all_files.pl
+@@ -0,0 +1,37 @@
++#!/usr/bin/perl
++use warnings;
++use strict;
++use 5.14.2;
++use Data::Dumper;
++
++# find me all files from the current subdir down and print them out
++# do not print out directory names.
++
++# Khaos 2014-11-22
++
++print "\n################################\n";
++print "## ".qx{date};
++
++for my $item (  qx{find ./} ) {
++    $item = trim($item);
++
++    if ( -f $item ) {
++        if ( $item !~ /\..*?\.swp$/ && $item !~ m{^\./\.videkah/} ) {
++            print $item."\n";
++        } else {
++#            print "SWAPPPPPPP OR Videkah : $item\n";
++        }
++    }
++
++}
++
++print "\n################################\n\n";
++
++
++sub trim {
++    my ($txt) = @_;
++    $txt =~ s/^\s*//g;
++    $txt =~ s/\s*$//g;
++    return $txt;
++}
++
+diff --git a/v0.01/videkah/bin/vimrc_main_key_map b/v0.01/videkah/bin/vimrc_main_key_map
+index 895aded..347c269 100644
+--- a/v0.01/videkah/bin/vimrc_main_key_map
++++ b/v0.01/videkah/bin/vimrc_main_key_map
+@@ -35,7 +35,11 @@ nnoremap <f6> :q<cr>
+ " f7 is defined in vimrc_videkah, because it is used in videkah for running stuff (like deploying code with some script)
+ 
+ " f8 is the quitter or quit-and-reload key
+-nnoremap <f8> :qa<cr>
++nnoremap <f8> :call QuitNSave()<cr>
++function! QuitNSave()
++    exec ":w!"
++    exec ":qa!"
++endfunction 
+ " <f8><f8> calls a videkah quit-and-reload function . so that has moved to the vimrc_videkah
+ 
+ nnoremap <f9> :w<cr>
+diff --git a/v0.01/videkah/bin/vimrc_videkah b/v0.01/videkah/bin/vimrc_videkah
+index a0b67e4..44ad064 100644
+--- a/v0.01/videkah/bin/vimrc_videkah
++++ b/v0.01/videkah/bin/vimrc_videkah
+@@ -1931,4 +1931,4 @@ endfunction
+ 
+ " "# TODO rm this line" needs to be definable. i.e. so it could be "// TODO rm this line" or whatever works in whatever language. currently its hard-coded to perl , and that is BAD . 
+ 
+-echo "Videkah v0.01-2014-11-29-0941"
++echo "Videkah v0.01-2014-11-29-1114"
