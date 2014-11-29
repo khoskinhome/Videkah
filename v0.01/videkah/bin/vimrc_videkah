@@ -1930,3 +1930,5 @@ endfunction
 " <leader>r currently adds a "# TODO rm this line" on the end of a line. It would be nice to be able to do a visual select on a few lines and be able  to add or remove the suffixed "# TODO rm this line" .
 
 " "# TODO rm this line" needs to be definable. i.e. so it could be "// TODO rm this line" or whatever works in whatever language. currently its hard-coded to perl , and that is BAD . 
+
+echo "Videkah v0.01-2014-11-29-0941"
