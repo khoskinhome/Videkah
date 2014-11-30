@@ -1,6 +1,5 @@
 crap
 ################################
-## Tue Nov 25 23:32:39 GMT 2014
 # general files , docs, install :-
 ./README.INSTALL.TXT
 ./videkah/README
@@ -38,6 +37,7 @@ crap
 ./videkah/bin/videkah_perlstacktrace.pl
 ./videkah/bin/videkah_generate_config
 ./videkah/bin/videkah_find_all_files.pl
+./videkah/bin/videkah_perl_tidy_one_line.pl
 
 
 ################################
