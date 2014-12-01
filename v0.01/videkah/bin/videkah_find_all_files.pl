@@ -16,7 +16,10 @@ for my $item (  qx{find ./} ) {
     $item = trim($item);
 
     if ( -f $item ) {
-        if ( $item !~ /\..*?\.swp$/ && $item !~ m{^\./\.videkah/} ) {
+        if (    $item !~ /\..*?\.swp$/
+            &&  $item !~ m{^\./\.videkah/}
+            &&  $item !~ m{^\./\.git/}
+        ){
             print $item."\n";
         } else {
 #            print "SWAPPPPPPP OR Videkah : $item\n";
