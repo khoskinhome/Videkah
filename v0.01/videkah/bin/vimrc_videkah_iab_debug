@@ -10,8 +10,11 @@
 iab vhbb #!/bin/bash<CR>
 
 " vhbp  = videkah perl hash bang line
-iab vhbp <ESC>1G0i#!/usr/bin/perl<CR>use strict;<CR>use warnings;<CR>
-iab vperl <ESC>1G0i#!/usr/bin/perl<CR>use strict;<CR>use warnings;<CR>
+iab vhbp <ESC>1G0i#!/usr/bin/perl<CR>use strict;<CR>use warnings;<CR>use 5.14.2;
+iab vperl <ESC>1G0i#!/usr/bin/perl<CR>use strict;<CR>use warnings;<CR>use 5.14.2;
+
+iab vpy <ESC>1G0i#!/usr/bin/python
+iab vpyd <ESC>1G0i#!/usr/bin/python<CR><CR>import os<CR><CR>def blah():<CR>    #blah
 
 " vppack = videkah perl package file header.
 iab vpack <esc>1G0ipackage     ;<cr>use warnings;<cr>use strict;<cr>use Data::Dumper;<cr><esc>

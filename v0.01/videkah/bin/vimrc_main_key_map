@@ -69,7 +69,7 @@ nnoremap <Leader>d :echo "leader d unused"<cr>
 nnoremap <Leader>f :echo "leader f unused"<cr>
 " <Leader>f TODO a way of searching for the last search string and find the next open buffer with the last search string, and open that buffer.
 
-nnoremap <Leader>g :call GitBlame(@%)<cr>
+nnoremap <Leader>g :Gblame<cr>
 " TODO some better way of having the synchronised buffers like bedwards has.
 function! GitBlame (filename)
    echo "BLHAAHAHHAHA " 

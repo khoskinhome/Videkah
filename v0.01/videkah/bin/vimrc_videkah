@@ -165,7 +165,10 @@ map <f8><f8> :call QuitAndReloadVidekah()<cr>
 "map <f7> :!clear;cplist2HEAD touch<cr>
 "map <f7> :!clear;cplist2RELEASE touch<cr>
 "map <f7> :!clear;cplist2chef52 touch<cr>
-map  <f7> :!clear;cplist2chef51 touch<cr>
+"map  <f7> :!clear;cplist2chef51 touch<cr>
+map  <f7> :!clear;./install-to-pi.bash pioldwifi<cr>
+
+
 " TODO <f7> needs to map to a generic "run this option" function.
 " TODO need a prompt for the cplist2 options . I need to be able to deploy to more than one codeinst
 " in fact F7 could be a "run" command. and somewhere in videkah there is a list of commands to run.
