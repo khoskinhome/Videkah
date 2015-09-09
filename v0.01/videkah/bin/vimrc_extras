@@ -1,9 +1,6 @@
 "set smartindent
 
 
-set tabstop=4
-set shiftwidth=4
-set expandtab
 
 "====[ Set up smarter search behaviour ]=======================
 

@@ -30,6 +30,9 @@ iab vpvl <ESC>0imy ($karl_package, $karl_filename, $karl_line) = caller; Venda->
 " vpd  = videkah perl dumper ( if you already have use Data::Dumper somewhere )
 iab vpd <ESC>0iprint STDERR "\nvidekahnum Dumper of   =".Dumper (); # TODO rm this line<cr><ESC>klllllllllllllllllllllllllllllllllllli
 
+" vdb = videkah dbnote
+iab vdb <ESC>0idbnote( -1 ,    ); # TODO rm this line<cr><ESC>kllllllllllll=
+
 " vpp = videkah perl print
 iab vpp <ESC>0iprint STDERR "\nvidekahnum    \n"; # TODO rm this line<cr><ESC>kllllllllllllllllllllllllllli
 

@@ -110,7 +110,30 @@ nnoremap <Leader>r <esc>A # TODO rm this line<cr><esc>
 " leader-s : split window horizontally
 nnoremap <Leader>s :split<cr>
 
-nnoremap <Leader>t :echo "leader t unused"<cr>
+"nnoremap <Leader>t :echo "leader t unused"<cr>
+nnoremap <Leader>t mz:execute TabToggle()<CR>'z
+"nmap <F9> mz:execute TabToggle()<CR>'z
+
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+" allow toggling between local and default mode
+function TabToggle()
+  if &expandtab
+    set shiftwidth=8
+    set softtabstop=0
+    set noexpandtab
+	echo "tab mode. 8 char width tab"
+  else
+    set shiftwidth=4
+    set softtabstop=4
+    set expandtab
+	echo "tab mode. 4 spaces per tab"
+  endif
+endfunction
+
+
+
 nnoremap <Leader>u :echo "leader u unused"<cr>
 
 " leader-v : split window vertically
@@ -144,5 +167,11 @@ function! ToggleMouse()
     echo "Mouse usage enabled"
   endif
 endfunction
+
+let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
+let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+
+
+
 
 
