@@ -70,14 +70,9 @@ nnoremap <Leader>f :echo "leader f unused"<cr>
 " <Leader>f TODO a way of searching for the last search string and find the next open buffer with the last search string, and open that buffer.
 
 nnoremap <Leader>g :Gblame<cr>
-" TODO some better way of having the synchronised buffers like bedwards has.
-function! GitBlame (filename)
-   echo "BLHAAHAHHAHA " 
-    exec '!git blame -w '.a:filename
-endfunction
 
-" leader-h no-syntax-highlighting . also known as 'hugo' button ( hence h )
-nnoremap <Leader>h :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax on <Bar> endif <CR>:echo @%<cr>
+" leader-h no-syntax-highlighting . Also known as 'hugo' / 'highlighting' button ( hence h )
+nnoremap <Leader>hh :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax on <Bar> endif <CR>:echo @%<cr>
 
 " TODO , what the frick does set paste do ? FIND OUT !
 nnoremap <Leader>i :echo "leader i unused"<cr>
@@ -168,8 +163,18 @@ function! ToggleMouse()
   endif
 endfunction
 
-let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
-let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+"let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
+"let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+
+nnoremap <silent> <Leader>h
+      \ :if exists('w:long_line_match') <Bar>
+      \   silent! call matchdelete(w:long_line_match) <Bar>
+      \   unlet w:long_line_match <Bar>
+      \ elseif &textwidth > 0 <Bar>
+      \   let w:long_line_match = matchadd('ErrorMsg', '\%>'.&tw.'v.\+', -1) <Bar>
+      \ else <Bar>
+      \   let w:long_line_match = matchadd('ErrorMsg', '\%>80v.\+', -1) <Bar>
+      \ endif<CR>
 
 
 
