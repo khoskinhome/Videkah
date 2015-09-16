@@ -259,16 +259,16 @@ map   <S-tab>  :bprev<cr>:echo @%<cr>
 " tab = next tab
 map   <tab>    :bnext<cr>:echo @%<cr>
 
-"map <s-f12> :call BrowserRTTicket ()<CR>
+map <s-f12> :call Browser()<CR>
 "map <f12> :call Browser ()<CR>
-"function! Browser ()
+function! Browser ()
 "    " attempt to find an http[s] link in the current line
-"    let line = getline (".")
-"    let httplink = matchstr (line, "http[s]*://[^ ,;\t]*")
+    let line = getline (".")
+    let httplink = matchstr (line, "http[s]*://[^ ,;\t]*")
 "    if httplink ==""
 "        let httplink = matchstr (line, "www\.[^ ,;\t]*")
 "    endif
-"
+
 "    " Venda specific : look for a 4 or more digit number and assume it's an rt ticket number
 "    " only if we don't already have a link to open.
 "    if httplink == ""
@@ -278,16 +278,16 @@ map   <tab>    :bnext<cr>:echo @%<cr>
 "        endif
 "    endif
 "
-"    " if we've got something to open , open it in firefox
-"    if httplink != ""
-"        exec ":silent !firefox ".httplink." & "
-"        exec ":redraw!"
-"        echo "found link : ".httplink
-"    else
-"        echo "Couldn't http link in current line"
-"    endif
-"
-"endfunction
+    " if we've got something to open , open it in firefox
+    if httplink != ""
+        exec ":silent !firefox '".httplink."' 2>/dev/null >/dev/null &"
+        exec ":redraw!"
+        echo "found link : ".httplink
+    else
+        echo "Couldn't http link in current line"
+    endif
+
+endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
