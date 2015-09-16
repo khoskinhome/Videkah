@@ -27,6 +27,9 @@ crap
 ./videkah/bin/vimrc_videkah
 ./videkah/bin/vimrc_videkah_iab_debug
 
+  ./videkah/bin/vimrc_videkah:1257: # TODO rm this line
+  ./videkah/bin/vimrc_videkah:497:function! Navigate_to_file_and_anchor(thisline, onlyOpenReadableFiles) # TODO rm this line
+  ./videkah/bin/vimrc_main_key_map:138:nnoremap <Leader>w :echo "leader w unused"<cr> # TODO rm this line
 ######################################
 # Bash shell script to start videkah :-
 ./videkah/bin/videkah_khaos
