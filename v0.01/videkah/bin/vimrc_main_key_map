@@ -39,7 +39,7 @@ nnoremap <f8> :call QuitNSave()<cr>
 function! QuitNSave()
     exec ":w!"
     exec ":qa!"
-endfunction 
+endfunction
 " <f8><f8> calls a videkah quit-and-reload function . so that has moved to the vimrc_videkah
 
 nnoremap <f9> :w<cr>
@@ -135,7 +135,21 @@ nnoremap <Leader>u :echo "leader u unused"<cr>
 nnoremap <Leader>v :vsplit<cr>
 "" this doesn't work :map <1-LeftMouse>v :vsplit<cr>
 
-nnoremap <Leader>w :echo "leader w unused"<cr>
+"nnoremap <Leader>w :echo "leader w unused"<cr>
+nnoremap <Leader>w :call ClearTrailingWhitespace()<CR>
+"map <f12> :call Browser ()<CR>
+function! ClearTrailingWhitespace ()
+    " and M$ end-of-line chars
+    exec ':silent %s/\r$//g'
+    exec ':silent %s/\s\+$//g'
+    exec ':redraw'
+endfunction
+
+
+" :%s/^\s\+$//g
+
+
+
 nnoremap <Leader>x :echo "leader x unused"<cr>
 nnoremap <Leader>y :echo "leader y unused"<cr>
 nnoremap <Leader>z :echo "leader z unused"<cr>
