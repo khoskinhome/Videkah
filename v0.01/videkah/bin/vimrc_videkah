@@ -367,7 +367,6 @@ function! SelectLineOn_videkah_filelist_GUTS(thisline, onlyOpenReadableFiles)
     endif
 
 "    echo "In SelectLineOn_videkah_filelist_GUTS"
-
     let thisline = Trim(a:thisline)
 
     " if this line is hashed out , don't navigate ANYWHERE !
@@ -425,8 +424,8 @@ function! SelectLineOn_videkah_filelist_GUTS(thisline, onlyOpenReadableFiles)
     endif
 
     let filename = matchstr(thisline, '^.\{-}:')
-    if ! empty ( filename ) && is_first_semi_colon_single  
-        " so if we have a filename , then there is a colon in the line, and if the is_first_semi_colon_single is set to 1 then this colon is a SINGLE colon, which means it is probably an ackgrep / grep type line , 
+    if ! empty ( filename ) && is_first_semi_colon_single
+        " so if we have a filename , then there is a colon in the line, and if the is_first_semi_colon_single is set to 1 then this colon is a SINGLE colon, which means it is probably an ackgrep / grep type line ,
         let filename  = substitute(filename , ':$', '','' )
 
         let lineno = matchstr(thisline, ':\d\+:')
@@ -492,6 +491,43 @@ function! SelectLineOn_videkah_filelist_GUTS(thisline, onlyOpenReadableFiles)
         echo @%
         return
     endif
+
+endfunction
+
+function! Navigate_to_file_and_anchor(thisline)
+    " new file:filename#anchor navigation
+
+    " return 1 if we DO nave to a file
+    " return undef if we don't nav to a file
+
+    "echo "New navigate to file and anchor"
+    "let filename = matchstr(a:thisline, 'file:[0-9a-zA-Z]#[0-9a-zA-Z]')
+    let fileNanchor = matchstr(a:thisline, 'file:[-_0-9a-zA-Z]\+#[-_:0-9a-zA-Z]\+')
+    if ! empty ( fileNanchor )
+        let filename = substitute( fileNanchor , '^file:', '','' )
+        let filename = substitute( filename , '#.\+$', '','' )
+
+        let anchor   = substitute( fileNanchor , '^.\+#', '','' )
+        "echo "new nav. found ".filename."  anchor ". anchor
+
+        if filereadable(filename)
+            let retval = TryAndOpenFileName (filename)
+            "echo @%
+            if ( search("^\s*#".anchor ,"") )
+                return 1
+            endif
+            if ( search("^".anchor ,"") )
+                return 1
+            endif
+
+            return 1
+        else
+            echo filename." doesn't exist"
+        endif
+
+    endif
+
+    return
 
 endfunction
 
@@ -1232,6 +1268,8 @@ function! SelectLineNo_GotoPerlUseModule()
         return ''
     endif
 
+
+
     " goto what might be a perl module definition on the current line, or maybe do a perl_static_class_hierarcy
 
     " this gets run by the main SelectLineNo_ dispatcher
@@ -1247,6 +1285,10 @@ function! SelectLineNo_GotoPerlUseModule()
     " on of the defined "lib" dirs
 
     let currline = getline(".")
+
+    if ( Navigate_to_file_and_anchor( currline ))
+        return
+    endif
 
     let currline = substitute(currline,'^[# ]\+',"","") "remove leading spaces and hashes
 
@@ -1825,10 +1867,10 @@ function! TryAndOpenFileName (buffile)
     " if the current buffer that we're leaving is the videkah_config
     " then we really want to reload the videkah_config
     let buffile=a:buffile
-    if ( bufnr(buffile) != -1 )
+    if ( bufnr("^".buffile."$") != -1 )
         " need to do this if we are to stay at the current line , and not reopen the file everytime.
         exec ":silent w!"
-        exec ":silent b ". bufnr(buffile)
+        exec ":silent b ". bufnr("^".buffile."$")
     else
         " file wasn't in any buffer , so open it up .
         exec ":silent w!"
