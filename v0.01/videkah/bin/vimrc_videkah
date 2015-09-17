@@ -502,7 +502,7 @@ function! Navigate_to_file_and_anchor(thisline)
 
     "echo "New navigate to file and anchor"
     "let filename = matchstr(a:thisline, 'file:[0-9a-zA-Z]#[0-9a-zA-Z]')
-    let fileNanchor = matchstr(a:thisline, 'file:[.-_0-9a-zA-Z]\+\(#[.-_:0-9a-zA-Z]\+\)*')
+    let fileNanchor = matchstr(a:thisline, 'file:[.\-_0-9a-zA-Z]\+\(#[.\-_:0-9a-zA-Z]\+\)*')
     if ! empty ( fileNanchor )
         let filename = substitute( fileNanchor , '^file:', '','' )
         let filename = substitute( filename , '#.\+$', '','' )
@@ -512,12 +512,11 @@ function! Navigate_to_file_and_anchor(thisline)
             let anchor = ""
         endif
 
-        "echo "new nav. found ".filename."  anchor ". anchor
+        " echo "new nav. found-file = ".filename." | anchor = ". anchor
 
         if filereadable(filename)
             let retval = TryAndOpenFileName (filename)
-            "echo @%
-            if ( anchor )
+            if ( anchor != '' )
                 if ( search("^\s*#".anchor ,"") )
                     return 1
                 endif
@@ -527,7 +526,7 @@ function! Navigate_to_file_and_anchor(thisline)
             endif
             return 1
         else
-            echo filename." doesn't exist"
+            echo "file ".filename." doesn't exist. Can't nav to file:".filename
         endif
 
     endif
