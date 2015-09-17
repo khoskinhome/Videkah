@@ -26,6 +26,7 @@ crap
 # the files that are only sourced in videkah mode.
 ./videkah/bin/vimrc_videkah
 ./videkah/bin/vimrc_videkah_iab_debug
+./videkah/bin/vimrc_videkah_iab_todo_ntt
 
   ./videkah/bin/vimrc_videkah:1257: # TODO rm this line
   ./videkah/bin/vimrc_videkah:497:function! Navigate_to_file_and_anchor(thisline, onlyOpenReadableFiles) # TODO rm this line

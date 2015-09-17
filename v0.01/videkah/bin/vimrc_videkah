@@ -61,6 +61,7 @@ nnoremap <Space>c :call Select_g_videkah_buffer('videkah_config')<cr>
 "This is to copy the current-filename, its line-number, and its contents into the @" register
 " y for "yank" this location , the space leader , coz its to do with videkah navigation :)
 nnoremap <Space>y :call CopyCurrentLocationToMainRegister()<cr>
+nnoremap <Space>u :call CopyCurrentLocationToMainRegister_filelink()<cr>
 "
 "
 "
@@ -534,6 +535,8 @@ function! Navigate_to_file_and_anchor(thisline)
     return
 
 endfunction
+
+
 
 function! SelectLineOn_videkah_runlist()
     if ! IsVidekahMode()
@@ -1949,6 +1952,17 @@ function! CopyCurrentLocationToMainRegister()
     :echo "copied to current line in nav format to main register. use p to paste  "
 
 endfunction
+
+function! CopyCurrentLocationToMainRegister_filelink()
+    " generate a link for use with Navigate_to_file_and_anchor
+    let filename2add = Trim(@%)
+    let @" = " file:".filename2add."#"
+
+    :echo " link  file:".filename2add."# copie main register. use p to paste"
+
+endfunction
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Wishlist of features and improvements to the code..
 """"""""""""""""""""""""""""""
