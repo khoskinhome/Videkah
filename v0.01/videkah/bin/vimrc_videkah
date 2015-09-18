@@ -508,7 +508,7 @@ function! Navigate_to_file_and_anchor(thisline)
         let filename = substitute( fileNanchor , '^file:', '','' )
         let filename = substitute( filename , '#.\+$', '','' )
 
-        let anchor   = substitute( fileNanchor , '^.\+#', '','' )
+        let anchor   = substitute( fileNanchor , '^.\+#\+', '','' )
         if ( empty ( matchstr( fileNanchor,'#' )))
             let anchor = ""
         endif
@@ -518,9 +518,10 @@ function! Navigate_to_file_and_anchor(thisline)
         if filereadable(filename)
             let retval = TryAndOpenFileName (filename)
             if ( anchor != '' )
-                if ( search("^\s*#".anchor ,"") )
+                if ( search("^[ #]*".anchor ,"") )
                     return 1
                 endif
+                " i don't think we'll ever get to the following match :
                 if ( search("^".anchor ,"") )
                     return 1
                 endif
@@ -1949,16 +1950,28 @@ function! CopyCurrentLocationToMainRegister()
     " and yet still has the g:Videkah_todo_rm_this_line_suffix
     let @" = "  ## ".filename2add.":".currLineNumber.":".currLineContents." ".g:Videkah_todo_rm_this_line_suffix."\n"
 
-    :echo "copied to current line in nav format to main register. use p to paste  "
+    echo "copied to current line in nav format to main register. use p to paste  "
 
 endfunction
 
 function! CopyCurrentLocationToMainRegister_filelink()
     " generate a link for use with Navigate_to_file_and_anchor
     let filename2add = Trim(@%)
-    let @" = " file:".filename2add."#"
 
-    :echo " link  file:".filename2add."# copie main register. use p to paste"
+    " same regex as that in Navigate_to_file_and_anchor that validates the anchor part.
+    let prefix = matchstr(getline('.'),'^[ #]*[.\-_:0-9a-zA-Z]\+' )
+
+    if ( empty (prefix))
+        let filelink = " file:".filename2add."#"
+    else
+
+        let prefix = substitute(prefix,'^[ #]*',"","") "remove leading hashes
+
+        let filelink = " file:".filename2add."#".prefix
+    endif
+
+    let @" = filelink
+    echo " link  ".filelink." copied to main register. Use p to paste"
 
 endfunction
 
