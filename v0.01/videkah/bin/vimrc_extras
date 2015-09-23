@@ -293,13 +293,25 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " whitespace and commenting functions. Not really a core part of videkah navigation
 "
-vmap <Leader><space> :call VisualSelectionTrimTrailingSpace_n_tabs2spaces()<cr>
-function! VisualSelectionTrimTrailingSpace_n_tabs2spaces()
+vmap <Leader><space> <esc>:call ClearTrailingWhiteSpace_visual()<cr>
 
-    " TODO . the <leader><space> could do with working on single lines .
+nmap <leader><space> <esc>:call Ctwsln()<cr>
 
-    " on the current visual selection trim all trailing spaces at the end of lines
-    " also convert all leading tabs into 4 spaces.
+nmap <silent> <leader><space><space> <esc>:call Ctwsbufnorm()<cr>
+
+"Ctwsln = clear trailing whitespace line normal
+function! Ctwsln()
+    " and also clear Microsoft ^M end-of-line chars
+
+    let linestr = getline('.')
+    let linestr = substitute ( linestr, '\r$'  ,'','' )
+    let linestr = substitute ( linestr, '\s\+$','','' )
+    call setline( '.' , linestr )
+
+endfunction
+
+function! ClearTrailingWhiteSpace_visual()
+    " and also clear Microsoft ^M end-of-line chars
 
     let [lnum1, col1] = getpos("'<")[1:2]
     let [lnum2, col2] = getpos("'>")[1:2]
@@ -310,14 +322,9 @@ function! VisualSelectionTrimTrailingSpace_n_tabs2spaces()
 
         let linestr = getline(ln)
 
-        " strip of trailing spaces :-
+        " strip off ^M and then the trailing spaces :-
+        let linestr = substitute ( linestr, '\r$'  ,'','' )
         let linestr = substitute ( linestr, '\s\+$','','' )
-
-        " TODO the whole changing leading tabs to spaces doesn't yet work .
-        " change leading tabs to 4 spaces :-
-        "let origlinestr = linestr
-        "
-        "let linestr = substitute ( linestr, '^\t','    ','' )
 
         call setline( ln, linestr )
         let ln += 1
@@ -325,9 +332,24 @@ function! VisualSelectionTrimTrailingSpace_n_tabs2spaces()
 
 endfunction
 
-"dog       
-"gone    
-"nuts      
+" ClearTrailingWhiteSpace_in_buffer_normal
+function! Ctwsbufnorm()
+    " and also clear Microsoft ^M end-of-line chars
+    " works on the entire current buffer
+
+    " if the file extension is .pl .pm .py .js then don't do this .
+    let ext = expand('%:e') "get the file extension
+    if ( ext ==? 'pl' || ext ==? 'pm' || ext ==? 'py' || ext ==? 'js' || ext ==? 'c')
+        echo "Not clearing the entire buffer on file extension of type '".ext."'"
+        return
+    endif
+
+    silent! exec '%s/\r$//g'
+    silent! exec '%s/\s\+$//g'
+    exec ':redraw'
+
+endfunction
+
 
 
 vmap <leader>rm <esc>:call Visual_append_rm_this_line()<cr>
@@ -342,11 +364,23 @@ echo "Visual_append_rm_this_line !!"
 endfunction
 
 " adding and removing hashes at the front of a line functions
-nmap <leader># <esc>0i#<esc>j0i#<esc>j0i#<esc>j
-vmap <leader># <esc>:call Hashline()<cr>
-vmap <leader>## <esc>:call RemoveLeadingHashline('one')<cr>
+nmap <leader># <esc>:call Hashline_normal()<cr>
+vmap <leader># <esc>:call Hashline_visual()<cr>
+vmap <leader>## <esc>:call RemoveLeadingHashline_visual('one')<cr>
 vmap <leader>### <esc>:call RemoveLeadingHashline('multi')<cr>
-function! Hashline()
+
+
+function! Hashline_normal()
+
+    let commentchar = GetCommentCharForFileExt()
+    exec "normal \<esc>0i".commentchar."\<esc>j0i".commentchar."\<esc>j0i".commentchar."\<esc>j"
+    "nmap <leader># <esc>0i#<esc>j0i#<esc>j0i#<esc>j
+endfunction
+
+
+function! Hashline_visual()
+
+    let commentchar = GetCommentCharForFileExt()
 
     let [lnum1, col1] = getpos("'<")[1:2]
     let [lnum2, col2] = getpos("'>")[1:2]
@@ -354,25 +388,27 @@ function! Hashline()
     let ln = lnum1
 
     while ln <= lnum2
-        call setline(ln,"#".getline(ln))
+        call setline(ln,commentchar.getline(ln))
         let ln += 1
     endwhile
 
 endfunction
 
-function! RemoveLeadingHashline(oneOrMulti)
+function! RemoveLeadingHashline_visual(oneOrMulti)
 
     let [lnum1, col1] = getpos("'<")[1:2]
     let [lnum2, col2] = getpos("'>")[1:2]
+
+    let commentchar = GetCommentCharForFileExt()
 
     let ln = lnum1
 
     while ln <= lnum2
 
         if ( a:oneOrMulti ) == 'multi'
-            call setline( ln , substitute(getline(ln),'^\#\+',"","") )
+            call setline( ln , substitute(getline(ln),'^\'.commentchar.'\+',"","") )
         else
-            call setline( ln , substitute(getline(ln),'^\#',"","") )
+            call setline( ln , substitute(getline(ln),'^\'.commentchar,"","") )
         endif
 
         let ln += 1
@@ -380,5 +416,29 @@ function! RemoveLeadingHashline(oneOrMulti)
 
 endfunction
 
+function! GetCommentCharForFileExt()
+    "what is the file extension ?
+        " if it is sql use a --
+        " if it is js  use a //
+
+        " everything else currently use a #
+    " this is a limited set , but works for me for perl, python, sql and js.
+
+    let commentchar='#'
+    if ( expand('%:e') ==? 'sql' )
+        let commentchar='--'
+    endif
+
+    if ( expand('%:e') ==? 'js' )
+        let commentchar='//'
+    endif
+
+    if ( expand('%:e') ==? 'c' )
+        let commentchar='//'
+    endif
+
+    return commentchar
+
+endfunction
 
 

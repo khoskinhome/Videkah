@@ -100,7 +100,7 @@ function! DateStamp()
     echo "(1) hh:mm_yyyy-mm-dd"
     echo "(2) yyyy-mm-dd_hh:mm"
     echo "(3) dddd ddth mmmm yyyy"
-    echo "(4) dddd ddth mmmm yyyy AND yyyy-mm-dd_hh:mm"
+    echo "(4) dddd ddth mmmm yyyy AND yyyy-mm-dd"
 
     let dtype = DateStamp_select()
 
@@ -108,7 +108,7 @@ function! DateStamp()
 
     if dtype == 4
         " special case. it pastes at the begining of the line.
-        let ts = "#############################\n".strftime("%A %d %B %Y")."\n".strftime("%Y-%m-%d_%H:%M")."\n"."-----------------------------\n"
+        let ts = "#############################\n".strftime("%A %d %B %Y")."\n".strftime("%Y-%m-%d")."\n"."-----------------------------\n"
         exec "normal 0i".ts
         return
     endif
@@ -222,19 +222,7 @@ nnoremap <Leader>u :echo "leader u unused"<cr>
 nnoremap <Leader>v :vsplit<cr>
 "" this doesn't work :map <1-LeftMouse>v :vsplit<cr>
 
-"nnoremap <Leader>w :echo "leader w unused"<cr>
-nnoremap <Leader>w :call ClearTrailingWhitespace()<CR>
-"map <f12> :call Browser ()<CR>
-function! ClearTrailingWhitespace ()
-    " and M$ end-of-line chars
-    exec ':silent %s/\r$//g'
-    exec ':silent %s/\s\+$//g'
-    exec ':redraw'
-endfunction
-
-
-" :%s/^\s\+$//g
-
+nnoremap <Leader>w :echo "leader w unused"<cr>
 
 
 nnoremap <Leader>x :echo "leader x unused"<cr>
