@@ -12,7 +12,7 @@ set ignorecase      "Ignore case in all searches...
 set smartcase       "...unless uppercase letters used
 set hlsearch        "Highlight all matches
 
-" cursor stuff . 
+" cursor stuff .
 highlight iCursor guifg=cyan guibg=steelblue
 highlight Cursor guifg=white guibg=steelblue
 
@@ -109,7 +109,7 @@ set formatoptions-=cro
 set wrapmargin=2                            "Wrap 2 characters from the edge of the window
 
 
-" need a quick way of switching on and off autoindent and smartindent 
+" need a quick way of switching on and off autoindent and smartindent
 
 "map . :set autoindent<cr>:set smartindent<cr>
 "map , :set noautoindent<cr>:set nosmartindent<cr>
@@ -126,7 +126,7 @@ inoremap # X<C-H>#|                         "And no magic outdent for comments
 
 "ctrl-s to save :-D
 " DOESN'T WORK, need to switch off ctrl-s in TTY ... hmmm...
-"map   <C-s>  :w   
+"map   <C-s>  :w
 
 
 
@@ -175,7 +175,7 @@ vmap S                         :s//g<LEFT><LEFT>
 
 " Make naughty characters visible...
 " (uBB is right double angle, uB7 is middle dot)
-" KARL : i find this painful on copy n paste operations. 
+" KARL : i find this painful on copy n paste operations.
 "exec \"set lcs=tab:\uBB\uBB,trail:\uB7,nbsp:~\"            <remove the \ from slash-double-quotes
 
 "augroup VisibleNaughtiness
@@ -213,8 +213,13 @@ vmap <BS> x
 vmap aa VGo1G
 
 " When shifting, retain selection over multiple shifts...
-vmap <expr> > KeepVisualSelection(">")
-vmap <expr> < KeepVisualSelection("<")
+"vmap <expr> > KeepVisualSelection(">")
+"vmap <expr> < KeepVisualSelection("<")
+"vnoremap <expr> > KeepVisualSelection(">")
+"vnoremap <expr> < KeepVisualSelection("<")
+
+vnoremap > ><CR>gv
+vnoremap < <<CR>gv
 
 function! KeepVisualSelection(cmd)
     if mode() ==# "V"
@@ -293,9 +298,9 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " whitespace and commenting functions. Not really a core part of videkah navigation
 "
-vmap <Leader><space> <esc>:call ClearTrailingWhiteSpace_visual()<cr>
+vmap <silent> <Leader><space> <esc>:call ClearTrailingWhiteSpace_visual()<cr>
 
-nmap <leader><space> <esc>:call Ctwsln()<cr>
+nmap <silent> <leader><space> <esc>:call Ctwsln()<cr>
 
 nmap <silent> <leader><space><space> <esc>:call Ctwsbufnorm()<cr>
 
@@ -340,8 +345,14 @@ function! Ctwsbufnorm()
     " if the file extension is .pl .pm .py .js then don't do this .
     let ext = expand('%:e') "get the file extension
     if ( ext ==? 'pl' || ext ==? 'pm' || ext ==? 'py' || ext ==? 'js' || ext ==? 'c')
-        echo "Not clearing the entire buffer on file extension of type '".ext."'"
-        return
+        echo "This file has an extension of '".ext."'"
+        echo "Clearing all trailing whitespace could make a big git diff"
+
+        let yORn = PromptYesOrNo("Do you want to clear ? " )
+
+        if ( yORn ==? 'n' )
+            return
+        endif
     endif
 
     silent! exec '%s/\r$//g'
@@ -351,23 +362,13 @@ function! Ctwsbufnorm()
 endfunction
 
 
-
-vmap <leader>rm <esc>:call Visual_append_rm_this_line()<cr>
-
-function! Visual_append_rm_this_line()
-
-echo "Visual_append_rm_this_line !!"
-echo "Visual_append_rm_this_line !!"
-echo "Visual_append_rm_this_line !!"
-echo "Visual_append_rm_this_line !!"
-
-endfunction
+" <leader>r set in another file.
 
 " adding and removing hashes at the front of a line functions
-nmap <leader># <esc>:call Hashline_normal()<cr>
-vmap <leader># <esc>:call Hashline_visual()<cr>
-vmap <leader>## <esc>:call RemoveLeadingHashline_visual('one')<cr>
-vmap <leader>### <esc>:call RemoveLeadingHashline('multi')<cr>
+nmap <silent>  <leader># <esc>:call Hashline_normal()<cr>
+vmap <silent>  <leader># <esc>:call Hashline_visual()<cr>
+vmap <silent>  <leader>## <esc>:call RemoveLeadingHashline_visual('one')<cr>
+vmap <silent>  <leader>### <esc>:call RemoveLeadingHashline('multi')<cr>
 
 
 function! Hashline_normal()

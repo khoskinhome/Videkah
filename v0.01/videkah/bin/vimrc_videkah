@@ -1976,6 +1976,53 @@ function! CopyCurrentLocationToMainRegister_filelink()
 endfunction
 
 
+" "# TODO rm this line" stuff
+
+nnoremap <Leader>r <esc>:call Normal_append_rm_this_line()<cr>
+
+function! Normal_append_rm_this_line()
+
+    "echo "<leader>r called"
+    exec "normal A".g:Videkah_todo_rm_this_line_suffix."\<cr>\<esc>"
+
+endfunction
+
+
+vmap <silent>  <leader>r <esc>:call Visual_append_rm_this_line()<cr>
+vmap <silent>  <leader>rr <esc>:call Visual_remove_rm_this_line()<cr>
+
+function! Visual_append_rm_this_line()
+
+    let [lnum1, col1] = getpos("'<")[1:2]
+    let [lnum2, col2] = getpos("'>")[1:2]
+
+    let ln = lnum1
+
+    while ln <= lnum2
+        call setline(ln,getline(ln).g:Videkah_todo_rm_this_line_suffix)
+        let ln += 1
+    endwhile
+
+endfunction
+
+function! Visual_remove_rm_this_line()
+
+    let [lnum1, col1] = getpos("'<")[1:2]
+    let [lnum2, col2] = getpos("'>")[1:2]
+
+    let commentchar = GetCommentCharForFileExt()
+
+    let ln = lnum1
+
+    while ln <= lnum2
+
+        call setline( ln , substitute(getline(ln),g:Videkah_todo_rm_this_line_suffix.'\s*$' ,"","") )
+        let ln += 1
+    endwhile
+
+endfunction
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Wishlist of features and improvements to the code..
 """"""""""""""""""""""""""""""

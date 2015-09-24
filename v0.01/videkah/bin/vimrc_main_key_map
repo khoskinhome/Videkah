@@ -182,7 +182,7 @@ nnoremap <Leader>p :echo "leader p unused"<cr>
 
 nnoremap <Leader>q :echo "leader q unused"<cr>
 
-nnoremap <Leader>r <esc>A # TODO rm this line<cr><esc>
+"<leader>r set in another file
 
 " leader-s : see below
 
