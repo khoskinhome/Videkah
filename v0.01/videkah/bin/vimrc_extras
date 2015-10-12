@@ -284,7 +284,7 @@ function! Browser ()
 "
     " if we've got something to open , open it in firefox
     if httplink != ""
-        exec ":silent !firefox '".httplink."' 2>/dev/null >/dev/null &"
+        exec( ":silent !firefox '".shellescape(httplink,1)."' 2>/dev/null >/dev/null &" )
         exec ":redraw!"
         echo "found link : ".httplink
     else
