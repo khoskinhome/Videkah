@@ -26,9 +26,9 @@
 " ln -s ~/.vim/videkah/bin/vimrc_videkah_source_this ~/.vimrc
 
 
-call plug#begin('~/.vim/plugged')
-Plug 'https://github.com/fatih/vim-go'
-call plug#end()
+"call plug#begin('~/.vim/plugged')
+"Plug 'https://github.com/fatih/vim-go'
+"call plug#end()
 
 
 " and please leave this line here for those that source this file :-
