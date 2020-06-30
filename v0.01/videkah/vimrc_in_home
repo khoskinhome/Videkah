@@ -26,18 +26,22 @@
 " ln -s ~/.vim/videkah/bin/vimrc_videkah_source_this ~/.vimrc
 
 
+call plug#begin('~/.vim/plugged')
+Plug 'https://github.com/fatih/vim-go'
+call plug#end()
+
+
 " and please leave this line here for those that source this file :-
 source $HOME/.vim/videkah/bin/vimrc_videkah_source_this
+"
+:colo peachpuff
 
-" Some Linux distributions set filetype in /etc/vimrc.
-" Clear filetype flags before changing runtimepath to force Vim to reload them.
-"filetype off
-"filetype plugin indent off
-
- au BufRead,BufNewFile *.go set filetype=go
-
-"set runtimepath+=$GOROOT/misc/vim
-"filetype plugin indent on
-"syntax on
+let g:go_metalinter_autosave = 0
+let g:go_build_tags = 'integration'
+"let g:go_test_timeout= '10s'
+"let g:go_metalinter_deadline= '20s'
 
 
+" Show trailing whitepace and spaces before a tab:
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/

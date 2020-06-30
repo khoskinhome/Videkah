@@ -28,40 +28,65 @@ nnoremap <Space> :call SelectNext_videkah_special_buffer()<cr>
 
 "These all navigate to the buffer with the symbolic name of videkah_filelist :-
 nnoremap <Space><space> :call Select_g_videkah_buffer('videkah_filelist')<cr>
-nnoremap <Space>f :call Select_g_videkah_buffer('videkah_filelist')<cr>
 
 "This adds the current buffer filename to the top of the filelist :-
 nnoremap <Space>a :call AddCurrentBufferNameToFileList()<cr>
+nnoremap <Space>b :echo "space b unused"<cr>
 
-"These all navigate to the buffer with the symbolic name of videkah_perl_stacktrace :-
-nnoremap <Space>t :call Select_g_videkah_buffer('videkah_perl_stacktrace')<cr>
-
-"These all navigate to the buffer with the symbolic name of videkah_perl_static_class_hierarchy :-
-nnoremap <Space>h :call Select_g_videkah_buffer('videkah_perl_static_class_hierarchy')<cr>
-
-"These all navigate to the buffer with the symbolic name of videkah_perl_ackgrep :-
-nnoremap <Space>g :call Select_g_videkah_buffer('videkah_perl_ackgrep')<cr>
-
-"These all navigate to the buffer with the symbolic name of videkah_runlist :-
-nnoremap <Space>r :call Select_g_videkah_buffer('videkah_runlist')<cr>
+"These all navigate to the buffer with the symbolic name of videkah_config :-
+nnoremap <Space>c :call Select_g_videkah_buffer('videkah_config')<cr>
 
 "These all navigate to the buffer with the symbolic name of videkah_git_diff :-
 nnoremap <Space>d :call Select_g_videkah_buffer('videkah_git_diff')<cr>:call Videkah_git_diff("HEAD")
 "diff-todo key press ( i.e. RM lines, todos, excess eol space ):-
 nnoremap <Space>dd :call Videkah_create_git_diff_removelines_buffer()<cr>
 
+nnoremap <Space>e :echo "space e unused"<cr>
+
+nnoremap <Space>f :call Select_g_videkah_buffer('videkah_filelist')<cr>
+
+nnoremap <Space>g :call Select_g_videkah_buffer('videkah_git_diff')<cr>:call Videkah_git_command("diff develop..HEAD")
+
+"These all navigate to the buffer with the symbolic name of videkah_perl_static_class_hierarchy :-
+nnoremap <Space>h :call Select_g_videkah_buffer('videkah_perl_static_class_hierarchy')<cr>
+
+nnoremap <Space>j :echo "space j unused"<cr>
+nnoremap <Space>k :echo "space k unused"<cr>
+nnoremap <Space>l :echo "space l unused"<cr>
+nnoremap <Space>m :echo "space m unused"<cr>
+"" <space>n keymapping is reservered for the khaosnum in the vimrc_khoskin file
+
+nnoremap <Space>o :echo "space o unused"<cr>
+
+"These all navigate to the buffer with the symbolic name of videkah_perl_ackgrep :-
+nnoremap <Space>p :call Select_g_videkah_buffer('videkah_perl_ackgrep')<cr>
+
+nnoremap <Space>q :echo "space q unused"<cr>
+
+"These all navigate to the buffer with the symbolic name of videkah_runlist :-
+nnoremap <Space>r :call Select_g_videkah_buffer('videkah_runlist')<cr>
+
+"navigate to the git diff buffer and run a git command , defaults to 'show'
+nnoremap <Space>s :call Select_g_videkah_buffer('videkah_git_diff')<cr>:call Videkah_git_command("show")
+
+"These all navigate to the buffer with the symbolic name of videkah_perl_stacktrace :-
+nnoremap <Space>t :call Select_g_videkah_buffer('videkah_perl_stacktrace')<cr>
+
+nnoremap <Space>v :echo "space v unused"<cr>
+nnoremap <Space>w :echo "space w unused"<cr>
+nnoremap <Space>x :echo "space x unused"<cr>
+nnoremap <Space>z :echo "space z unused"<cr>
+
 "These all navigate to the buffer with the symbolic name of videkah_git_diff :-
 nnoremap <Space>dr :call Videkah_create_git_diff_removelines_buffer()<cr>
 
-"" <space>n keymapping is reservered for the khaosnum in the vimrc_khoskin file
-
-"These all navigate to the buffer with the symbolic name of videkah_config :-
-nnoremap <Space>c :call Select_g_videkah_buffer('videkah_config')<cr>
-
 "This is to copy the current-filename, its line-number, and its contents into the @" register
 " y for "yank" this location , the space leader , coz its to do with videkah navigation :)
-nnoremap <Space>y :call CopyCurrentLocationToMainRegister()<cr>
+nnoremap <Space>y :call CopyCurrentLocationToMainRegisterShort()<cr>
+nnoremap <Space>yy :call CopyCurrentLocationToMainRegister()<cr>
+nnoremap <Space>yyy :call CopyCurrentLocationToMainRegisterLeadingHash()<cr>
 nnoremap <Space>u :call CopyCurrentLocationToMainRegister_filelink()<cr>
+nnoremap <Space>i :call CopyCurrentLocationToMainRegisterLeadingHash()<cr>
 "
 "
 "
@@ -130,8 +155,52 @@ nnoremap <Space>u :call CopyCurrentLocationToMainRegister_filelink()<cr>
 "
 "
 "
-let g:Videkah_todo_rm_this_line_suffix = '# TODO rm this line'
-let g:Videkah_todo_rm_this_line_regex = g:Videkah_todo_rm_this_line_suffix.'$'
+
+function! FN_Videkah_todo_rm_this_line_regex()
+
+    return FN_Videkah_todo_rm_this_line_suffix().'$'
+
+endfunction
+
+function! FN_Videkah_todo_rm_this_line_suffix()
+    
+    let Videkah_todo_rm_this_line_suffix = ' TODO rm line'
+
+    return GetCommentCharForFileExt().Videkah_todo_rm_this_line_suffix
+
+endfunction
+
+function! GetCommentCharForFileExt()
+    "what is the file extension ?
+        " if it is sql use a --
+        " if it is js  use a //
+
+        " everything else currently use a #
+    " this is a limited set , but works for me for perl, python, sql, and go
+
+    let commentchar='#'
+    if ( expand('%:e') ==? 'sql' )
+        let commentchar='--'
+    endif
+
+    if ( expand('%:e') ==? 'js' )
+        let commentchar='//'
+    endif
+
+    if ( expand('%:e') ==? 'c' )
+        let commentchar='//'
+    endif
+
+    if ( expand('%:e') ==? 'go' )
+        let commentchar='//'
+    endif
+
+    return commentchar
+
+endfunction
+
+
+
 let g:videkah_git_diff_TODO = ".videkah/git_diff_TODO"
 let g:videkah_last_git_diff_param = "HEAD"
 
@@ -167,9 +236,7 @@ map <f8><f8> :call QuitAndReloadVidekah()<cr>
 "map <f7> :!clear;cplist2RELEASE touch<cr>
 "map <f7> :!clear;cplist2chef52 touch<cr>
 "map  <f7> :!clear;cplist2chef51 touch<cr>
-
-" TODO get f7 to run the top line of the runlist.
-map  <f7> :!clear;./install-to-pi-pi.bash pitest<cr>
+map  <f7> :!clear;./install-to-pi.bash pioldwifi<cr>
 
 
 " TODO <f7> needs to map to a generic "run this option" function.
@@ -616,7 +683,7 @@ function! SelectLineOn_videkah_git_diff_TODO()
         " so we can Delete-this-line , Navigate to it , Hash-all-rm-line, Un-hash-all-rm-lines, Delete-all-rm-lines
 
         " TODO , could give an option to RM all the lines in the git_diff_TODO buffer, and remove the line from the buffer too.
-        " The offer could also be to ## out the lines that match "g:Videkah_todo_rm_this_line_regex" , and leave them in place.
+        " The offer could also be to ## out the lines that match "FN_Videkah_todo_rm_this_line_regex()" , and leave them in place.
 
         let delORnav = PromptDeleteLineOrNavigateOrDelAllOrHashAll( )
 
@@ -785,7 +852,7 @@ function! Videkah_create_git_diff_removelines_buffer()
     " So this function generates the git-diff-todo-buffer, and it has lines with 3 types of action :-
     "   excess SPACE lines . where a "+" line in the git diff has been found to have trailing space.
     "   has a TODO somewhere in the line
-    "   has a "TODO rm this line" at the end of the line ( actually the g:Videkah_todo_rm_this_line_regex match )
+    "   has a "TODO rm this line" at the end of the line ( actually the FN_Videkah_todo_rm_this_line_regex match() )
     "
     " the lines are generated so that the RM lines that should be removed first are at the bottom of the git-diff-todo buffer.
     " this is so that the line can be deleted and it will not affect the position of the other lines that are going to 
@@ -802,7 +869,7 @@ function! Videkah_create_git_diff_removelines_buffer()
     let strip_eol_space = Videkah_git_diff_getArrayOfEdits('\s\+$',0)
 
     " rm_lines is an array of all the "+" lines that are being lined up for deletion.
-    let TODOrmRegex = g:Videkah_todo_rm_this_line_regex
+    let TODOrmRegex = FN_Videkah_todo_rm_this_line_regex()
     let rm_lines = Videkah_git_diff_getArrayOfEdits(TODOrmRegex,1)
 
     " todo_lines is an array of all the "+" lines that have TODO somewhere in them , and aren't a "TODO rm this line"
@@ -823,7 +890,7 @@ function! Videkah_create_git_diff_removelines_buffer()
 
     " outputting the todo_lines
     for i in todo_lines
-        " need to check that it isn't one of the  g:Videkah_todo_rm_this_line_regex
+        " need to check that it isn't one of the  FN_Videkah_todo_rm_this_line_regex()
         if ( empty( matchstr( i[2] , TODOrmRegex ) ) )
             let blah = "## TODO  ## ".i[1].":".i[0].":".i[2]
             call append(0, blah)
@@ -953,7 +1020,33 @@ function! Videkah_git_diff(param)
 
     echo "we have just run 'git diff ".a:param."'"
 
+    " need to do cleverness with this, currently it isn't used :
     let g:videkah_last_git_diff_param = a:param
+
+endfunction
+
+function! Videkah_git_command(param)
+    " this is only here , coz its what generates the git diff in the videkah_git_diff buffer.
+    "Generate the git diff 
+    if ! IsVidekahMode()
+        return ''
+    endif
+
+    call Select_g_videkah_buffer('videkah_git_diff')
+
+    " after the previous select of videkah buffer to be the videkah_git_diff one, well we should be there,
+    " however lets just be sure only run the git diff command in the videkah_git_diff buffer
+    " this is because it will wipe out the existing contents of the buffer.
+    if ! IsCurrentVidekahBuffer("videkah_git_diff")
+        echo "Videkah_giff_diff() git command generation called, and we're not in the videkah_git_diff buffer"
+        return
+    endif
+    exec ":silent %! git ".a:param
+
+    echo "we have just run 'git ".a:param."'"
+
+    " This would need a new videkah git command  variable :
+    "let g:videkah_last_git_diff_param = a:param
 
 endfunction
 
@@ -1949,10 +2042,41 @@ function! CopyCurrentLocationToMainRegister()
     " should never be livened up by unhashing.
     " the unhashing feature only unhashes where there is no leading space on the line, hence the extra space needed here :-
     " also the unhashing doesn't unhash where the first # is a double ##. So the following is doubly safe from unhashing,
-    " and yet still has the g:Videkah_todo_rm_this_line_suffix
-    let @" = "  ## ".filename2add.":".currLineNumber.":".currLineContents." ".g:Videkah_todo_rm_this_line_suffix."\n"
+    " and yet still has the FN_Videkah_todo_rm_this_line_suffix()
+    let @" = "".filename2add.":".currLineNumber.":".currLineContents."\n"
 
-    echo "copied to current line in nav format to main register. use p to paste  "
+    echo "(LONG) copied to current line in nav format to main register. use p to paste  "
+
+endfunction
+function! CopyCurrentLocationToMainRegisterShort()
+
+    let filename2add = Trim(@%)
+    let currLineNumber = line('.')
+    let currLineContents = getline('.')
+    " the extra spaces in front are to stop the git-diff-unhashing feature from "livening" up code that
+    " should never be livened up by unhashing.
+    " the unhashing feature only unhashes where there is no leading space on the line, hence the extra space needed here :-
+    " also the unhashing doesn't unhash where the first # is a double ##. So the following is doubly safe from unhashing,
+    " and yet still has the FN_Videkah_todo_rm_this_line_suffix()
+    let @" = "".filename2add."\n"
+
+    echo "(SHORT) copied to current line in nav format to main register. use p to paste  "
+
+endfunction
+
+function! CopyCurrentLocationToMainRegisterLeadingHash()
+
+    let filename2add = Trim(@%)
+    let currLineNumber = line('.')
+    let currLineContents = getline('.')
+    " the extra spaces in front are to stop the git-diff-unhashing feature from "livening" up code that
+    " should never be livened up by unhashing.
+    " the unhashing feature only unhashes where there is no leading space on the line, hence the extra space needed here :-
+    " also the unhashing doesn't unhash where the first # is a double ##. So the following is doubly safe from unhashing,
+    " and yet still has the FN_Videkah_todo_rm_this_line_suffix()
+    let @" = "# ".filename2add.":".currLineNumber.":".currLineContents." ".FN_Videkah_todo_rm_this_line_suffix()."\n"
+
+    echo "(LONG HASHED) copied to current line in nav format to main register. use p to paste  "
 
 endfunction
 
@@ -1985,7 +2109,7 @@ nnoremap <Leader>r <esc>:call Normal_append_rm_this_line()<cr>
 function! Normal_append_rm_this_line()
 
     "echo "<leader>r called"
-    exec "normal A".g:Videkah_todo_rm_this_line_suffix."\<cr>\<esc>"
+    exec "normal A".FN_Videkah_todo_rm_this_line_suffix()."\<cr>\<esc>"
 
 endfunction
 
@@ -2001,7 +2125,7 @@ function! Visual_append_rm_this_line()
     let ln = lnum1
 
     while ln <= lnum2
-        call setline(ln,getline(ln).g:Videkah_todo_rm_this_line_suffix)
+        call setline(ln,getline(ln).FN_Videkah_todo_rm_this_line_suffix())
         let ln += 1
     endwhile
 
@@ -2018,7 +2142,7 @@ function! Visual_remove_rm_this_line()
 
     while ln <= lnum2
 
-        call setline( ln , substitute(getline(ln),g:Videkah_todo_rm_this_line_suffix.'\s*$' ,"","") )
+        call setline( ln , substitute(getline(ln),FN_Videkah_todo_rm_this_line_suffix().'\s*$' ,"","") )
         let ln += 1
     endwhile
 
@@ -2057,4 +2181,4 @@ endfunction
 
 " "# TODO rm this line" needs to be definable. i.e. so it could be "// TODO rm this line" or whatever works in whatever language. currently its hard-coded to perl , and that is BAD . 
 
-echo "Videkah v0.01-2014-11-29-1114"
+echo "Videkah v0.01-2020-07-01-0033"

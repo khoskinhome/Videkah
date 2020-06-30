@@ -268,21 +268,15 @@ map <f12> :call Browser()<CR>
 function! Browser ()
 "    " attempt to find an http[s] link in the current line
     let line = getline (".")
+
     let httplink = matchstr (line, "http[s]*://[^ ,;\t]*")
 "    if httplink ==""
 "        let httplink = matchstr (line, "www\.[^ ,;\t]*")
 "    endif
 
-"    " Venda specific : look for a 4 or more digit number and assume it's an rt ticket number
-"    " only if we don't already have a link to open.
-"    if httplink == ""
-"        let matchnum = matchstr (line, "[0-9][0-9][0-9][0-9][0-9]*")
-"        if matchnum != ""
-"            let httplink = "http://rt.uk.venda.com/Ticket/Display.html?id=".matchnum
-"        endif
-"    endif
 "
     " if we've got something to open , open it in firefox
+
     if httplink != ""
         "exec( ":silent !firefox '".shellescape(httplink,0)."' 2>/dev/null >/dev/null &" )
         let shellcmdrun = "firefox '".httplink."' 2>/dev/null >/dev/null &"
@@ -419,29 +413,29 @@ function! RemoveLeadingHashline_visual(oneOrMulti)
 
 endfunction
 
-function! GetCommentCharForFileExt()
-    "what is the file extension ?
-        " if it is sql use a --
-        " if it is js  use a //
-
-        " everything else currently use a #
-    " this is a limited set , but works for me for perl, python, sql and js.
-
-    let commentchar='#'
-    if ( expand('%:e') ==? 'sql' )
-        let commentchar='--'
-    endif
-
-    if ( expand('%:e') ==? 'js' )
-        let commentchar='//'
-    endif
-
-    if ( expand('%:e') ==? 'c' )
-        let commentchar='//'
-    endif
-
-    return commentchar
-
-endfunction
+"function! GetCommentCharForFileExt()
+"    "what is the file extension ?
+"        " if it is sql use a --
+"        " if it is js  use a //
+"
+"        " everything else currently use a #
+"    " this is a limited set , but works for me for perl, python, sql and js.
+"
+"    let commentchar='#'
+"    if ( expand('%:e') ==? 'sql' )
+"        let commentchar='--'
+"    endif
+"
+"    if ( expand('%:e') ==? 'js' )
+"        let commentchar='//'
+"    endif
+"
+"    if ( expand('%:e') ==? 'c' )
+"        let commentchar='//'
+"    endif
+"
+"    return commentchar
+"
+"endfunction
 
 
