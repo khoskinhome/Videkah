@@ -39,7 +39,7 @@ RUN_FROM_BASEDIR=/home/khoskin/github.com/Videkah/v0.01
 PERL_STACK_TRACE_STRIP_REGEX=
 
 #space separated paths. Just don't have dirs with spaces in , and that is always a bad idea.
-PERL_LIBPATHS= ./lib/ ./t/ 
+PERL_LIBPATHS= ./lib/ ./t/
 
 #ACKGREP_PATHS will default to PERL_LIBPATHS if it isn't supplied. list of space separated paths. can't cope with paths-with-spaces in at present.
 ACKGREP_PATHS=

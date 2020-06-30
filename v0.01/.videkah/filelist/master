@@ -1,4 +1,12 @@
 crap
+crap.sql
+crap.pl
+
+
+videkah/bin/vimrc_extras:216:vmap <expr> > KeepVisualSelection(">")
+videkah/bin/vimrc_extras:217:vmap <expr> < KeepVisualSelection("<")
+
+
 ################################
 ## Tue Nov 25 23:32:39 GMT 2014
 # general files , docs, install :-
@@ -21,17 +29,23 @@ crap
 
 # vim can source the following even when not in videkah mode.
 ./videkah/bin/vimrc_main_key_map
+
+./videkah/bin/vimrc_main_key_map:95:nnoremap <Leader>d :call DateStamp()<cr> # TODO rm this line
+
 ./videkah/bin/vimrc_extras
+videkah/bin/vimrc_videkah:133:let g:Videkah_todo_rm_this_line_suffix = '# TODO rm this line'
+
+videkah/bin/vimrc_main_key_map:185:nno
 
 # the files that are only sourced in videkah mode.
+
+videkah/bin/vimrc_videkah:1079:function! PromptYesOrNo(prompt_msg)
+
 ./videkah/bin/vimrc_videkah
 ./videkah/bin/vimrc_videkah_iab_debug
 ./videkah/bin/vimrc_videkah_iab_todo_ntt
 
-  ./videkah/bin/vimrc_videkah:1257: # TODO rm this line
-  ./videkah/bin/vimrc_videkah:497:function! Navigate_to_file_and_anchor(thisline, onlyOpenReadableFiles) # TODO rm this line
-  ./videkah/bin/vimrc_main_key_map:138:nnoremap <Leader>w :echo "leader w unused"<cr> # TODO rm this line
-######################################
+#####################################
 # Bash shell script to start videkah :-
 ./videkah/bin/videkah_khaos
 ./videkah/bin/videkah
@@ -45,4 +59,9 @@ crap
 
 
 ################################
+videkah/bin/vimrc_main_key_map:95:
+videkah/bin/vimrc_extras:346:
 
+  ./videkah/bin/vimrc_videkah:497:function! Navigate_to_file_and_anchor(thisline, onlyOpenReadableFiles) # TODO rm this line
+  ./videkah/bin/vimrc_videkah:1941:function! CopyCurrentLocationToMainRegister() # TODO rm this line
+#

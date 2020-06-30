@@ -167,7 +167,9 @@ map <f8><f8> :call QuitAndReloadVidekah()<cr>
 "map <f7> :!clear;cplist2RELEASE touch<cr>
 "map <f7> :!clear;cplist2chef52 touch<cr>
 "map  <f7> :!clear;cplist2chef51 touch<cr>
-map  <f7> :!clear;./install-to-pi.bash pioldwifi<cr>
+
+" TODO get f7 to run the top line of the runlist.
+map  <f7> :!clear;./install-to-pi-pi.bash pitest<cr>
 
 
 " TODO <f7> needs to map to a generic "run this option" function.
